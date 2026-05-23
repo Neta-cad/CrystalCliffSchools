@@ -8,10 +8,34 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- PAGE LOADER -->
+<div id="pageLoader">
+  <div class="loader-content">
+    <div class="loader-logo">CCS</div>
+    <div class="loader-tagline">Crystal Cliff Schools</div>
+    <div class="loader-bar-wrapper">
+      <div class="loader-bar" id="loaderBar"></div>
+    </div>
+    <div class="loader-text">Loading Excellence...</div>
+  </div>
+</div>
+  <!-- ANNOUNCEMENT BANNER -->
+<div class="announcement-banner" id="announcementBanner">
+  <div class="announcement-content">
+    <span class="announcement-pulse"></span>
+    <span class="announcement-text">
+      🎉 <strong>2025/2026 Admissions Now Open!</strong> — Limited spaces available. Apply today and secure your child's future!
+    </span>
+    <a href="#admissions" class="announcement-cta" onclick="closeBanner()">Apply Now →</a>
+  </div>
+  <button class="announcement-close" onclick="closeBanner()">✕</button>
+</div>
 
 <div id="scrollBar"></div>
 
 <nav>
+  <!-- THEME TOGGLE -->
+<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
   <div class="nav-logo">Crystal<span>Cliff</span></div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
@@ -107,6 +131,88 @@
 
 <div class="divider"></div>
 
+<!-- WHY CHOOSE US -->
+<section id="why">
+  <div class="section-label">Why Crystal Cliff</div>
+  <h2 class="section-title">Why Parents Choose Us</h2>
+  <p class="section-sub">We are not just another school. Here is what makes Crystal Cliff Schools truly different.</p>
+  <div class="why-grid">
+    <div class="why-card fade-up">
+      <div class="why-icon">🏆</div>
+      <div class="why-title">Proven Results</div>
+      <div class="why-desc">98% pass rate in WAEC and NECO. Our students consistently gain admission into top universities across Nigeria and abroad.</div>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-icon">👨‍🏫</div>
+      <div class="why-title">Qualified Teachers</div>
+      <div class="why-desc">Every teacher holds a minimum of B.Ed with subject specialization. We invest heavily in continuous teacher training.</div>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-icon">🔒</div>
+      <div class="why-title">Safe Environment</div>
+      <div class="why-desc">24/7 security, CCTV cameras, controlled access gates and a dedicated welfare officer for every student's safety.</div>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-icon">📱</div>
+      <div class="why-title">Parent Portal</div>
+      <div class="why-desc">Real-time access to your child's attendance, results, assignments and school fees via our dedicated parent app.</div>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-icon">🌍</div>
+      <div class="why-title">Global Curriculum</div>
+      <div class="why-desc">We blend the Nigerian curriculum with international best practices — preparing students for both local and global opportunities.</div>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-icon">❤️</div>
+      <div class="why-title">Small Class Sizes</div>
+      <div class="why-desc">Maximum 25 students per class ensuring every child gets personal attention, mentorship and academic support.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+<!-- PRINCIPAL'S MESSAGE -->
+<div class="divider"></div>
+<section id="principal" class="principal-section">
+  <div class="section-label">A Word From The Top</div>
+  <h2 class="section-title">Principal's Message</h2>
+  <div class="principal-grid">
+    <div class="principal-image-side fade-up">
+      <div class="principal-img-wrapper">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="Principal" class="principal-img">
+        <div class="principal-badge">🎓 School Principal</div>
+      </div>
+      <div class="principal-info">
+        <div class="principal-name">Mr. Emmanuel Adeyemi</div>
+        <div class="principal-title">B.Ed, M.Ed — Principal, Crystal Cliff Schools</div>
+        <div class="principal-years">✅ 20+ Years in Education</div>
+      </div>
+    </div>
+    <div class="principal-message fade-up">
+      <div class="quote-mark">"</div>
+      <p>Welcome to Crystal Cliff Schools — a place where every child is seen, valued, and challenged to become the very best version of themselves.</p>
+      <p>At Crystal Cliff, we do not just teach subjects. We build futures. Our dedicated team of educators works tirelessly to ensure that every student who walks through our doors leaves not only with outstanding academic results, but with strong character, confidence, and a love for lifelong learning.</p>
+      <p>Whether your child is just beginning their educational journey in our Nursery or preparing for their final WAEC examinations, I personally guarantee that they will receive the attention, care and rigour they deserve.</p>
+      <p>We believe that the partnership between school and family is the foundation of every successful student. I invite you to visit our campus, meet our teachers, and become part of the Crystal Cliff family.</p>
+      <div class="principal-signature">— Mr. Emmanuel Adeyemi</div>
+      <div class="principal-stats-row">
+        <div class="principal-stat">
+          <div class="p-stat-num">20+</div>
+          <div class="p-stat-label">Years Experience</div>
+        </div>
+        <div class="principal-stat">
+          <div class="p-stat-num">500+</div>
+          <div class="p-stat-label">Students Mentored</div>
+        </div>
+        <div class="principal-stat">
+          <div class="p-stat-num">98%</div>
+          <div class="p-stat-label">Pass Rate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="programs">
   <div class="section-label">What We Offer</div>
   <h2 class="section-title">Our Academic Programs</h2>
@@ -153,6 +259,104 @@
 
 <div class="divider"></div>
 
+<!-- SCHOOL FEE STRUCTURE -->
+<section id="fees">
+  <div class="section-label">Transparent Pricing</div>
+  <h2 class="section-title">School Fee Structure</h2>
+  <p class="section-sub">We believe in transparent, affordable pricing with no hidden charges. Quality education within your reach.</p>
+  <div class="fees-grid">
+
+    <div class="fee-card fade-up">
+      <div class="fee-header green">
+        <div class="fee-icon">🌱</div>
+        <div class="fee-level">Nursery</div>
+        <div class="fee-class">Ages 2 – 5</div>
+      </div>
+      <div class="fee-body">
+        <div class="fee-amount">₦180,000<span>/term</span></div>
+        <div class="fee-items">
+          <div class="fee-item">✅ Tuition Fee</div>
+          <div class="fee-item">✅ Textbooks & Materials</div>
+          <div class="fee-item">✅ Uniform (First Term)</div>
+          <div class="fee-item">✅ Lunch & Snacks</div>
+          <div class="fee-item">✅ School Activities</div>
+          <div class="fee-item muted">➕ Bus Service (Optional)</div>
+        </div>
+        <a href="#admissions" class="fee-btn">Apply Now →</a>
+      </div>
+    </div>
+
+    <div class="fee-card featured fade-up">
+      <div class="fee-popular">Most Popular</div>
+      <div class="fee-header blue">
+        <div class="fee-icon">📚</div>
+        <div class="fee-level">Primary School</div>
+        <div class="fee-class">Primary 1 – 6</div>
+      </div>
+      <div class="fee-body">
+        <div class="fee-amount">₦220,000<span>/term</span></div>
+        <div class="fee-items">
+          <div class="fee-item">✅ Tuition Fee</div>
+          <div class="fee-item">✅ Textbooks & Materials</div>
+          <div class="fee-item">✅ Uniform (First Term)</div>
+          <div class="fee-item">✅ Lunch & Snacks</div>
+          <div class="fee-item">✅ STEM & Computer Lab</div>
+          <div class="fee-item">✅ School Activities</div>
+        </div>
+        <a href="#admissions" class="fee-btn">Apply Now →</a>
+      </div>
+    </div>
+
+    <div class="fee-card fade-up">
+      <div class="fee-header purple">
+        <div class="fee-icon">🔬</div>
+        <div class="fee-level">Junior Secondary</div>
+        <div class="fee-class">JSS 1 – 3</div>
+      </div>
+      <div class="fee-body">
+        <div class="fee-amount">₦280,000<span>/term</span></div>
+        <div class="fee-items">
+          <div class="fee-item">✅ Tuition Fee</div>
+          <div class="fee-item">✅ Textbooks & Materials</div>
+          <div class="fee-item">✅ Science Lab Access</div>
+          <div class="fee-item">✅ Computer Lab</div>
+          <div class="fee-item">✅ BECE Preparation</div>
+          <div class="fee-item muted">➕ Bus Service (Optional)</div>
+        </div>
+        <a href="#admissions" class="fee-btn">Apply Now →</a>
+      </div>
+    </div>
+
+    <div class="fee-card fade-up">
+      <div class="fee-header gold">
+        <div class="fee-icon">🎯</div>
+        <div class="fee-level">Senior Secondary</div>
+        <div class="fee-class">SS 1 – 3</div>
+      </div>
+      <div class="fee-body">
+        <div class="fee-amount">₦350,000<span>/term</span></div>
+        <div class="fee-items">
+          <div class="fee-item">✅ Tuition Fee</div>
+          <div class="fee-item">✅ Textbooks & Materials</div>
+          <div class="fee-item">✅ WAEC/NECO Registration</div>
+          <div class="fee-item">✅ JAMB Preparation</div>
+          <div class="fee-item">✅ Career Counseling</div>
+          <div class="fee-item">✅ All Lab Access</div>
+        </div>
+        <a href="#admissions" class="fee-btn">Apply Now →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="fee-note fade-up">
+    💡 <strong>Note:</strong> Fees are reviewed annually. Sibling discounts of 10% apply from the second child. Scholarship opportunities available for exceptional students. Contact us for payment plan options.
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <section id="facilities">
   <div class="section-label">Our Campus</div>
   <h2 class="section-title">World-Class Facilities</h2>
@@ -166,6 +370,73 @@
     <div class="facility-card fade-up"><div class="facility-icon">🍽️</div><div class="facility-name">Cafeteria</div><div class="facility-desc">Nutritious, balanced meals served daily in a clean, spacious dining facility.</div></div>
     <div class="facility-card fade-up"><div class="facility-icon">🚌</div><div class="facility-name">School Bus</div><div class="facility-desc">Safe, GPS-tracked school bus service covering major routes across Lagos.</div></div>
     <div class="facility-card fade-up"><div class="facility-icon">🏥</div><div class="facility-name">Medical Centre</div><div class="facility-desc">On-campus health facility with a qualified nurse available every school day.</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VIRTUAL TOUR & MAP -->
+<section id="visit">
+  <div class="section-label">Find Us</div>
+  <h2 class="section-title">Visit Our Campus</h2>
+  <p class="section-sub">We welcome prospective parents and students to visit Crystal Cliff Schools. Come see our facilities, meet our teachers and experience our environment firsthand.</p>
+
+  <!-- Visit Info Cards -->
+  <div class="visit-cards">
+    <div class="visit-card fade-up">
+      <div class="visit-card-icon">🚗</div>
+      <div class="visit-card-title">By Car</div>
+      <div class="visit-card-desc">From Ajah roundabout, take the expressway towards Ibeju Lekki. Crystal Cliff Schools is on your right after 2km. Ample parking available.</div>
+    </div>
+    <div class="visit-card fade-up">
+      <div class="visit-card-icon">🚌</div>
+      <div class="visit-card-title">By Bus</div>
+      <div class="visit-card-desc">Take any bus heading towards Lekki-Epe Expressway and drop at Crystal Cliff Bus Stop. Our gate is just 50 meters from the stop.</div>
+    </div>
+    <div class="visit-card fade-up">
+      <div class="visit-card-icon">📅</div>
+      <div class="visit-card-title">Open Days</div>
+      <div class="visit-card-desc">We hold monthly Open Days every last Saturday of the month from 10AM – 2PM. No appointment needed — just walk in!</div>
+    </div>
+    <div class="visit-card fade-up">
+      <div class="visit-card-icon">📞</div>
+      <div class="visit-card-title">Book a Visit</div>
+      <div class="visit-card-desc">Prefer a private tour? Call us on +234 800 000 0000 or WhatsApp us to schedule a personal campus tour at your convenience.</div>
+    </div>
+  </div>
+
+  <!-- Map -->
+  <div class="map-container fade-up">
+    <div class="map-header">
+      <div>
+        <div class="map-title">📍 Crystal Cliff Schools</div>
+        <div class="map-address">123 Crystal Cliff Avenue, Lekki-Epe Expressway, Lagos, Nigeria</div>
+      </div>
+      <a href="https://maps.google.com" target="_blank" class="map-directions-btn">Get Directions →</a>
+    </div>
+    <div class="map-embed">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.721!2d3.5!3d6.43!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjUnNDgiLjAiTiAzwrAzMCcwMC4wIkU!5e0!3m2!1sen!2sng!4v1"
+        width="100%"
+        height="100%"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- CTA Banner -->
+  <div class="visit-cta fade-up">
+    <div class="visit-cta-text">
+      <div class="visit-cta-title">Ready to See Crystal Cliff in Person?</div>
+      <div class="visit-cta-sub">Join hundreds of families who have already discovered the Crystal Cliff difference. Book your campus visit today — it's completely free!</div>
+    </div>
+    <div class="visit-cta-btns">
+      <a href="https://wa.me/2348000000000" target="_blank" class="btn-primary">💬 WhatsApp Us</a>
+      <a href="tel:+2348000000000" class="btn-outline">📞 Call Us Now</a>
+    </div>
   </div>
 </section>
 
@@ -230,6 +501,98 @@
 
 <div class="divider"></div>
 
+<!-- STUDENT ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label">Our Pride</div>
+  <h2 class="section-title">Student Achievements</h2>
+  <p class="section-sub">Our students don't just pass exams — they win competitions, break records and make Crystal Cliff Schools proud every year.</p>
+
+  <!-- Achievement Stats -->
+  <div class="achievement-stats fade-up">
+    <div class="achievement-stat">
+      <div class="achievement-stat-icon">🎓</div>
+      <div class="achievement-stat-num">98%</div>
+      <div class="achievement-stat-label">WAEC Pass Rate 2024</div>
+    </div>
+    <div class="achievement-stat">
+      <div class="achievement-stat-icon">🏆</div>
+      <div class="achievement-stat-num">47</div>
+      <div class="achievement-stat-label">Competition Wins</div>
+    </div>
+    <div class="achievement-stat">
+      <div class="achievement-stat-icon">🎯</div>
+      <div class="achievement-stat-num">12</div>
+      <div class="achievement-stat-label">Scholarships Earned</div>
+    </div>
+    <div class="achievement-stat">
+      <div class="achievement-stat-icon">🌍</div>
+      <div class="achievement-stat-num">8</div>
+      <div class="achievement-stat-label">University Admissions Abroad</div>
+    </div>
+  </div>
+
+  <!-- Achievement Cards -->
+  <div class="achievements-grid">
+
+    <div class="achievement-card fade-up gold-card">
+      <div class="achievement-trophy">🥇</div>
+      <div class="achievement-year">2024</div>
+      <div class="achievement-title">Lagos State Mathematics Olympiad</div>
+      <div class="achievement-student">Adewale Olusegun — SS2</div>
+      <div class="achievement-desc">First place out of 200+ students from 50 schools across Lagos State in the annual Mathematics Olympiad competition.</div>
+      <div class="achievement-tag gold-tag">1st Place</div>
+    </div>
+
+    <div class="achievement-card fade-up blue-card">
+      <div class="achievement-trophy">🏅</div>
+      <div class="achievement-year">2024</div>
+      <div class="achievement-title">National Science Quiz Competition</div>
+      <div class="achievement-student">Amina Bello & Chidi Okafor — JSS3</div>
+      <div class="achievement-desc">Our JSS3 team placed 2nd in the National Science Quiz representing Lagos State with distinction in all three rounds.</div>
+      <div class="achievement-tag blue-tag">2nd Place</div>
+    </div>
+
+    <div class="achievement-card fade-up green-card">
+      <div class="achievement-trophy">🎖️</div>
+      <div class="achievement-year">2024</div>
+      <div class="achievement-title">Best Student — WAEC 2024</div>
+      <div class="achievement-student">Chidinma Okonkwo — SS3</div>
+      <div class="achievement-desc">Scored A1 in all 9 subjects in the 2024 WAEC examinations — the first student in Crystal Cliff history to achieve a perfect result.</div>
+      <div class="achievement-tag green-tag">Perfect Score</div>
+    </div>
+
+    <div class="achievement-card fade-up purple-card">
+      <div class="achievement-trophy">🏆</div>
+      <div class="achievement-year">2023</div>
+      <div class="achievement-title">Inter-School Debate Championship</div>
+      <div class="achievement-student">Crystal Cliff Debate Club</div>
+      <div class="achievement-desc">Our debate team won the Lagos Inter-School Debate Championship for the second consecutive year beating 30 competing schools.</div>
+      <div class="achievement-tag purple-tag">Champions</div>
+    </div>
+
+    <div class="achievement-card fade-up gold-card">
+      <div class="achievement-trophy">⚽</div>
+      <div class="achievement-year">2024</div>
+      <div class="achievement-title">Lagos Schools Football League</div>
+      <div class="achievement-student">Crystal Cliff FC — U17 Team</div>
+      <div class="achievement-desc">Our U17 football team won the Lagos Schools Football League trophy undefeated in all 12 matches of the season.</div>
+      <div class="achievement-tag gold-tag">Undefeated</div>
+    </div>
+
+    <div class="achievement-card fade-up blue-card">
+      <div class="achievement-trophy">💻</div>
+      <div class="achievement-year">2024</div>
+      <div class="achievement-title">National Coding Competition</div>
+      <div class="achievement-student">Tunde Fashola — SS1</div>
+      <div class="achievement-desc">Built an award-winning mobile app at age 16 that won the National Secondary School Coding Competition organized by NITDA.</div>
+      <div class="achievement-tag blue-tag">Best App</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <section id="news">
   <div class="section-label">Latest Updates</div>
   <h2 class="section-title">News & Events</h2>
@@ -241,6 +604,268 @@
   </div>
 </section>
 
+<div class="divider"></div>
+
+<!-- FAQ SECTION -->
+<section id="faq">
+  <div class="section-label">Got Questions?</div>
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <p class="section-sub">Everything parents need to know about Crystal Cliff Schools — answered clearly and honestly.</p>
+
+  <div class="faq-container">
+
+    <div class="faq-item fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>What age can my child start at Crystal Cliff Schools?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        We accept children from as young as 2 years old into our Nursery program. Our Early Years program is designed to give toddlers a warm, play-based introduction to learning in a safe and nurturing environment.
+      </div>
+    </div>
+
+    <div class="faq-item fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>How do I apply for admission?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        Simply fill out the admission form on this website or visit our school in person. After submitting your application, we will contact you within 48 hours to schedule an entrance assessment and parent interview.
+      </div>
+    </div>
+
+    <div class="faq-item fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>What is the school fee and when is it due?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        Fees vary by class level — from ₦180,000 per term for Nursery to ₦350,000 per term for Senior Secondary. Fees are due at the beginning of each term. We offer flexible payment plans and sibling discounts of 10% from the second child.
+      </div>
+    </div>
+
+    <div class="faq-item fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Do you provide school bus service?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        Yes! We operate a safe, GPS-tracked school bus service covering major routes across Lagos including Ajah, Lekki, Victoria Island, Ibeju Lekki and Sangotedo. Bus fees are charged separately per term based on your route.
+      </div>
+    </div>
+
+    <div class="faq-item fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>What curriculum do you follow?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        We follow the Nigerian National Curriculum approved by NERDC and WAEC. We also blend in international best practices in teaching methodology, STEM education and digital literacy to give our students a global edge.
+      </div>
+    </div>
+
+    <div class="faq-item fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>How many students are in each class?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        We maintain a maximum of 25 students per class to ensure every child receives personal attention from their teacher. This small class size is one of the key reasons our students consistently outperform larger schools.
+      </div>
+    </div>
+
+    <div class="faq-item fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Are there scholarship opportunities available?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        Yes! We offer merit-based scholarships for exceptionally talented students in academics, sports and the arts. Scholarship applications are reviewed at the start of every academic session. Contact our admissions office for details.
+      </div>
+    </div>
+
+    <div class="faq-item fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Can I visit the school before applying?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        Absolutely! We encourage all prospective parents to visit our campus. We hold Open Days every last Saturday of the month from 10AM – 2PM. You can also book a private tour by calling or WhatsApping us anytime.
+      </div>
+    </div>
+
+    <div class="faq-item fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>What extracurricular activities are available?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        We offer a wide range of extracurricular activities including football, basketball, swimming, music, drama, debate club, coding club, fine arts, robotics and cultural dance. Every student is encouraged to find their passion beyond the classroom.
+      </div>
+    </div>
+
+    <div class="faq-item fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>How do you keep parents informed about their child's progress?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        We use a dedicated Parent Portal app where you can track your child's attendance, view results, check assignments and receive real-time notifications. We also hold termly Parent-Teacher meetings and send home detailed report cards every term.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- UPCOMING EVENTS -->
+<section id="events">
+  <div class="section-label">What's Coming</div>
+  <h2 class="section-title">Upcoming Events</h2>
+  <p class="section-sub">Stay informed about important dates, school events and academic activities at Crystal Cliff Schools.</p>
+  <div class="events-container">
+
+    <div class="event-card fade-up">
+      <div class="event-date">
+        <div class="event-day">15</div>
+        <div class="event-month">JAN</div>
+      </div>
+      <div class="event-details">
+        <div class="event-badge sports">Sports</div>
+        <div class="event-title">Annual Sports Day & Prize Giving</div>
+        <div class="event-desc">A full day of exciting athletic competitions across all classes followed by prize giving for academic and sports excellence.</div>
+        <div class="event-meta">
+          <span>🕐 8:00 AM – 4:00 PM</span>
+          <span>📍 School Sports Complex</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-card fade-up">
+      <div class="event-date">
+        <div class="event-day">22</div>
+        <div class="event-month">JAN</div>
+      </div>
+      <div class="event-details">
+        <div class="event-badge pta">PTA Meeting</div>
+        <div class="event-title">First Term PTA Meeting 2025</div>
+        <div class="event-desc">Parents and teachers come together to discuss student progress, school policies and the academic calendar for the term.</div>
+        <div class="event-meta">
+          <span>🕐 10:00 AM – 1:00 PM</span>
+          <span>📍 School Hall</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-card fade-up">
+      <div class="event-date">
+        <div class="event-day">05</div>
+        <div class="event-month">FEB</div>
+      </div>
+      <div class="event-details">
+        <div class="event-badge exam">Examination</div>
+        <div class="event-title">First Term Examination Begins</div>
+        <div class="event-desc">First term examinations commence for all classes from Nursery through SS3. Timetables will be distributed two weeks prior.</div>
+        <div class="event-meta">
+          <span>🕐 8:00 AM</span>
+          <span>📍 All Classrooms</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-card fade-up">
+      <div class="event-date">
+        <div class="event-day">14</div>
+        <div class="event-month">FEB</div>
+      </div>
+      <div class="event-details">
+        <div class="event-badge cultural">Cultural Day</div>
+        <div class="event-title">Annual Cultural Day Celebration</div>
+        <div class="event-desc">Students celebrate Nigeria's rich cultural heritage through traditional attire, food, music, dance and drama performances.</div>
+        <div class="event-meta">
+          <span>🕐 9:00 AM – 3:00 PM</span>
+          <span>📍 School Auditorium</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-card fade-up">
+      <div class="event-date">
+        <div class="event-day">28</div>
+        <div class="event-month">FEB</div>
+      </div>
+      <div class="event-details">
+        <div class="event-badge admission">Admissions</div>
+        <div class="event-title">Open Day — School Campus Tour</div>
+        <div class="event-desc">Prospective parents and students are invited to tour our facilities, meet our teachers and learn about our programs.</div>
+        <div class="event-meta">
+          <span>🕐 10:00 AM – 2:00 PM</span>
+          <span>📍 School Main Gate</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-card fade-up">
+      <div class="event-date">
+        <div class="event-day">15</div>
+        <div class="event-month">MAR</div>
+      </div>
+      <div class="event-details">
+        <div class="event-badge graduation">Graduation</div>
+        <div class="event-title">SS3 & Primary 6 Graduation Ceremony</div>
+        <div class="event-desc">A prestigious ceremony celebrating our outgoing SS3 and Primary 6 students as they move on to the next chapter of their lives.</div>
+        <div class="event-meta">
+          <span>🕐 10:00 AM – 4:00 PM</span>
+          <span>📍 School Auditorium</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact">
+  <div class="section-label">Get In Touch</div>
+  <h2 class="section-title">Contact Us</h2>
+  <p class="section-sub">We'd love to hear from you. Reach out for admissions enquiries, school visits or any questions.</p>
+  <div class="contact-grid">
+    <div>
+<a class="contact-item" href="tel:+2348038982612">
+  <div class="contact-icon">📞</div>
+  <div>
+    <div class="contact-label">Phone</div>
+    <div class="contact-value">+234 803 898 2612</div>
+  </div>
+</a>
+      <a class="contact-item" href="mailto:info@crystalcliffschools.com"><div class="contact-icon">✉️</div><div><div class="contact-label">Email</div><div class="contact-value">info@crystalcliffschools.com</div></div></a>
+      <a class="contact-item" href="#"><div class="contact-icon">📍</div><div><div class="contact-label">Address</div><div class="contact-value">123 Crystal Cliff Avenue, Lagos, Nigeria</div></div></a>
+      <a class="contact-item" href="#"><div class="contact-icon">🕐</div><div><div class="contact-label">School Hours</div><div class="contact-value">Mon – Fri: 7:30 AM – 3:30 PM</div></div></a>
+    </div>
+    <div class="contact-form">
+      <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="Full name"></div>
+      <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" type="email" placeholder="your@email.com"></div>
+      <div class="form-group"><label class="form-label">Subject</label><input class="form-input" type="text" placeholder="How can we help?"></div>
+      <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Type your message here..." style="height:140px;"></textarea></div>
+      <button class="form-submit" onclick="sendMessage()">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">Crystal Cliff Schools</div>
+      <div class="footer-desc">Shaping tomorrow's leaders through academic excellence, character development and holistic education since 2009.</div>
+    </div>
+    <div>
+      <div class="footer-heading">Quick Links</div>
+      <div class="footer-links"><a href="#about">About Us</a><a href="#programs">Programs</a><a href="#facilities">Facilities</a><a href="#admissions">Admissions</a></div>
+    </div>
+    <div>
+    </div>
 <div class="divider"></div>
 
 <section id="contact">
@@ -274,4 +899,30 @@
       <div class="footer-heading">Quick Links</div>
       <div class="footer-links"><a href="#about">About Us</a><a href="#programs">Programs</a><a href="#facilities">Facilities</a><a href="#admissions">Admissions</a></div>
     </div>
-    <di
+    <div>
+      <div class="footer-heading">Academics</div>
+      <div class="footer-links"><a href="#programs">Nursery</a><a href="#programs">Primary School</a><a href="#programs">Junior Secondary</a><a href="#programs">Senior Secondary</a></div>
+    </div>
+    <div>
+      <div class="footer-heading">Contact</div>
+      <div class="footer-links"><a href="#">Lagos, Nigeria</a><a href="tel:+2348000000000">+234 800 000 0000</a><a href="mailto:info@crystalcliffschools.com">info@crystalcliffschools.com</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Crystal Cliff Schools. All rights reserved. Built by <strong style="color:var(--accent);">Akingboye Ayomide Mishael</strong></div>
+    <div class="footer-socials">
+      <a class="social-btn" href="#">📘</a>
+      <a class="social-btn" href="#">📸</a>
+      <a class="social-btn" href="#">🐦</a>
+      <a class="social-btn" href="#">▶️</a>
+    </div>
+  </div>
+</footer>
+<!-- WHATSAPP BUTTON -->
+<a href="https://wa.me/2348038982612" target="_blank" class="whatsapp-btn" id="whatsappBtn">
+  <div class="whatsapp-icon">💬</div>
+  <div class="whatsapp-text">Chat with us</div>
+</a>
+<script src="script.js"></script>
+</body>
+</html>
