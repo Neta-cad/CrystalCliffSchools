@@ -34,20 +34,25 @@
 <div id="scrollBar"></div>
 
 <nav>
-  <!-- THEME TOGGLE -->
-<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
   <div class="nav-logo">Crystal<span>Cliff</span></div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#programs">Programs</a></li>
-    <li><a href="#facilities">Facilities</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#news">News</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="#admissions" class="nav-cta">Apply Now</a>
+  <button id="themeToggle" onclick="toggleTheme()" style="
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    color: var(--text);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  ">🌙</button>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </nav>
 
@@ -71,25 +76,27 @@
       <a href="#admissions" class="btn-primary">Apply for Admission →</a>
       <a href="#about" class="btn-outline">Learn More</a>
     </div>
-    <div class="stats-row">
-      <div class="stat-item">
-        <div class="stat-number">500+</div>
-        <div class="stat-label">Students Enrolled</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">98%</div>
-        <div class="stat-label">Pass Rate</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">50+</div>
-        <div class="stat-label">Expert Teachers</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">15+</div>
-        <div class="stat-label">Years of Excellence</div>
-      </div>
+   <div class="stats-row">
+  <div class="stat-item">
+    <div class="stat-number counter" data-target="500" data-suffix="+">0</div>
+    <div class="stat-label">Students Enrolled</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number counter" data-target="98" data-suffix="%">0</div>
+    <div class="stat-label">Pass Rate</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number counter" data-target="50" data-suffix="+">0</div>
+    <div class="stat-label">Expert Teachers</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number counter" data-target="15" data-suffix="+">0</div>
+    <div class="stat-label">Years of Excellence</div>
+  </div>
+</div>
     </div>
   </div>
+  
 </section>
 
 <div class="divider"></div>
@@ -416,14 +423,14 @@
     </div>
     <div class="map-embed">
       <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.721!2d3.5!3d6.43!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjUnNDgiLjAiTiAzwrAzMCcwMC4wIkU!5e0!3m2!1sen!2sng!4v1"
-        width="100%"
-        height="100%"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.5!2d3.7976945!3d6.4602301!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjcnMzYuOCJOIDPCsDQ3JzUxLjciRQ!5e0!3m2!1sen!2sng!4v1&q=Green+Haven+Estate+Alatishe+Ibeju+Lekki+Lagos"
+  width="100%"
+  height="100%"
+  style="border:0;"
+  allowfullscreen=""
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade">
+</iframe>
     </div>
   </div>
 
@@ -477,14 +484,67 @@
   <div class="section-label">Campus Life</div>
   <h2 class="section-title">Life at Crystal Cliff</h2>
   <p class="section-sub">A glimpse into the vibrant, enriching environment our students enjoy every day.</p>
+
   <div class="gallery-grid">
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80" alt="Classroom"><div class="gallery-overlay"><div class="gallery-caption">Modern Classrooms</div></div></div>
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=400&q=80" alt="Science"><div class="gallery-overlay"><div class="gallery-caption">Science Lab</div></div></div>
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=400&q=80" alt="Sports"><div class="gallery-overlay"><div class="gallery-caption">Sports Day</div></div></div>
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&q=80" alt="Library"><div class="gallery-overlay"><div class="gallery-caption">Our Library</div></div></div>
-    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80" alt="Graduation"><div class="gallery-overlay"><div class="gallery-caption">Graduation Day</div></div></div>
+    <div class="gallery-item" onclick="openLightbox(0)">
+      <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80" alt="Classroom">
+      <div class="gallery-overlay">
+        <div class="gallery-caption">Modern Classrooms</div>
+        <div class="gallery-zoom">🔍</div>
+      </div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(1)">
+      <img src="https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=400&q=80" alt="Science">
+      <div class="gallery-overlay">
+        <div class="gallery-caption">Science Lab</div>
+        <div class="gallery-zoom">🔍</div>
+      </div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(2)">
+      <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=400&q=80" alt="Sports">
+      <div class="gallery-overlay">
+        <div class="gallery-caption">Sports Day</div>
+        <div class="gallery-zoom">🔍</div>
+      </div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(3)">
+      <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&q=80" alt="Library">
+      <div class="gallery-overlay">
+        <div class="gallery-caption">Our Library</div>
+        <div class="gallery-zoom">🔍</div>
+      </div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(4)">
+      <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80" alt="Graduation">
+      <div class="gallery-overlay">
+        <div class="gallery-caption">Graduation Day</div>
+        <div class="gallery-zoom">🔍</div>
+      </div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(5)">
+      <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&q=80" alt="Students">
+      <div class="gallery-overlay">
+        <div class="gallery-caption">Happy Students</div>
+        <div class="gallery-zoom">🔍</div>
+      </div>
+    </div>
   </div>
 </section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-content" onclick="event.stopPropagation()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <button class="lightbox-prev" onclick="changeLightbox(-1)">←</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <button class="lightbox-next" onclick="changeLightbox(1)">→</button>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
 
 <div class="divider"></div>
 
@@ -492,10 +552,90 @@
   <div class="section-label">What Parents Say</div>
   <h2 class="section-title">Trusted by Families</h2>
   <p class="section-sub">Hear from parents and students whose lives have been transformed by Crystal Cliff Schools.</p>
-  <div class="testimonials-grid">
-    <div class="testimonial-card fade-up"><div class="stars">★★★★★</div><div class="testimonial-text">"Crystal Cliff has been a blessing for our family. My daughter went from struggling to becoming the best student in her class. The teachers truly care."</div><div class="testimonial-author"><div class="author-avatar">AM</div><div><div class="author-name">Mrs. Adaeze Musa</div><div class="author-role">Parent of JSS 2 Student</div></div></div></div>
-    <div class="testimonial-card fade-up"><div class="stars">★★★★★</div><div class="testimonial-text">"My son got admitted to UNILAG after his SS3 at Crystal Cliff. The preparation for WAEC and JAMB was exceptional. Forever grateful!"</div><div class="testimonial-author"><div class="author-avatar">TO</div><div><div class="author-name">Mr. Tunde Ogundimu</div><div class="author-role">Parent of SS3 Graduate</div></div></div></div>
-    <div class="testimonial-card fade-up"><div class="stars">★★★★★</div><div class="testimonial-text">"The environment is safe, teachers are qualified, and facilities are top-notch. Crystal Cliff is worth every naira. My kids are happy and excelling."</div><div class="testimonial-author"><div class="author-avatar">NK</div><div><div class="author-name">Mrs. Ngozi Kalu</div><div class="author-role">Parent of 2 Students</div></div></div></div>
+
+  <div class="slider-container">
+    <div class="slider-track" id="sliderTrack">
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <div class="testimonial-text">"Crystal Cliff has been a blessing for our family. My daughter went from struggling to becoming the best student in her class. The teachers truly care."</div>
+        <div class="testimonial-author">
+          <div class="author-avatar">AM</div>
+          <div>
+            <div class="author-name">Mrs. Adaeze Musa</div>
+            <div class="author-role">Parent of JSS 2 Student</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <div class="testimonial-text">"My son got admitted to UNILAG after his SS3 at Crystal Cliff. The preparation for WAEC and JAMB was exceptional. Forever grateful!"</div>
+        <div class="testimonial-author">
+          <div class="author-avatar">TO</div>
+          <div>
+            <div class="author-name">Mr. Tunde Ogundimu</div>
+            <div class="author-role">Parent of SS3 Graduate</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <div class="testimonial-text">"The environment is safe, teachers are qualified, and facilities are top-notch. Crystal Cliff is worth every naira. My kids are happy and excelling."</div>
+        <div class="testimonial-author">
+          <div class="author-avatar">NK</div>
+          <div>
+            <div class="author-name">Mrs. Ngozi Kalu</div>
+            <div class="author-role">Parent of 2 Students</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <div class="testimonial-text">"I was skeptical at first but Crystal Cliff exceeded every expectation. My son's confidence and grades have improved dramatically since joining."</div>
+        <div class="testimonial-author">
+          <div class="author-avatar">BA</div>
+          <div>
+            <div class="author-name">Mr. Biodun Adeyinka</div>
+            <div class="author-role">Parent of Primary 5 Student</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <div class="testimonial-text">"The teachers go above and beyond. My daughter calls her class teacher her second mum! That level of care is rare and priceless."</div>
+        <div class="testimonial-author">
+          <div class="author-avatar">FO</div>
+          <div>
+            <div class="author-name">Mrs. Funke Olarewaju</div>
+            <div class="author-role">Parent of Nursery Student</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <div class="testimonial-text">"Crystal Cliff's coding club changed my son's life. He now builds apps at 15 and has already won a national competition. Incredible school!"</div>
+        <div class="testimonial-author">
+          <div class="author-avatar">EO</div>
+          <div>
+            <div class="author-name">Mr. Emeka Okafor</div>
+            <div class="author-role">Parent of SS1 Student</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Controls -->
+    <div class="slider-controls">
+      <button class="slider-btn" id="prevBtn" onclick="slideTestimonial(-1)">←</button>
+      <div class="slider-dots" id="sliderDots"></div>
+      <button class="slider-btn" id="nextBtn" onclick="slideTestimonial(1)">→</button>
+    </div>
   </div>
 </section>
 
@@ -508,28 +648,28 @@
   <p class="section-sub">Our students don't just pass exams — they win competitions, break records and make Crystal Cliff Schools proud every year.</p>
 
   <!-- Achievement Stats -->
-  <div class="achievement-stats fade-up">
-    <div class="achievement-stat">
-      <div class="achievement-stat-icon">🎓</div>
-      <div class="achievement-stat-num">98%</div>
-      <div class="achievement-stat-label">WAEC Pass Rate 2024</div>
-    </div>
-    <div class="achievement-stat">
-      <div class="achievement-stat-icon">🏆</div>
-      <div class="achievement-stat-num">47</div>
-      <div class="achievement-stat-label">Competition Wins</div>
-    </div>
-    <div class="achievement-stat">
-      <div class="achievement-stat-icon">🎯</div>
-      <div class="achievement-stat-num">12</div>
-      <div class="achievement-stat-label">Scholarships Earned</div>
-    </div>
-    <div class="achievement-stat">
-      <div class="achievement-stat-icon">🌍</div>
-      <div class="achievement-stat-num">8</div>
-      <div class="achievement-stat-label">University Admissions Abroad</div>
-    </div>
+ <div class="achievement-stats fade-up">
+  <div class="achievement-stat">
+    <div class="achievement-stat-icon">🎓</div>
+    <div class="achievement-stat-num counter" data-target="98">0</div>
+    <div class="achievement-stat-label">WAEC Pass Rate 2024</div>
   </div>
+  <div class="achievement-stat">
+    <div class="achievement-stat-icon">🏆</div>
+    <div class="achievement-stat-num counter" data-target="47">0</div>
+    <div class="achievement-stat-label">Competition Wins</div>
+  </div>
+  <div class="achievement-stat">
+    <div class="achievement-stat-icon">🎯</div>
+    <div class="achievement-stat-num counter" data-target="12">0</div>
+    <div class="achievement-stat-label">Scholarships Earned</div>
+  </div>
+  <div class="achievement-stat">
+    <div class="achievement-stat-icon">🌍</div>
+    <div class="achievement-stat-num counter" data-target="8">0</div>
+    <div class="achievement-stat-label">University Admissions Abroad</div>
+  </div>
+</div>
 
   <!-- Achievement Cards -->
   <div class="achievements-grid">
@@ -841,7 +981,7 @@
   </div>
 </a>
       <a class="contact-item" href="mailto:info@crystalcliffschools.com"><div class="contact-icon">✉️</div><div><div class="contact-label">Email</div><div class="contact-value">info@crystalcliffschools.com</div></div></a>
-      <a class="contact-item" href="#"><div class="contact-icon">📍</div><div><div class="contact-label">Address</div><div class="contact-value">123 Crystal Cliff Avenue, Lagos, Nigeria</div></div></a>
+      <a class="contact-item" href="#"><div class="contact-icon">📍</div><div><div class="contact-label">Address</div><div class="contact-value">Road A4, Green Haven Estate, Alatishe, Ibeju Lekki, Lagos</div></div></a>
       <a class="contact-item" href="#"><div class="contact-icon">🕐</div><div><div class="contact-label">School Hours</div><div class="contact-value">Mon – Fri: 7:30 AM – 3:30 PM</div></div></a>
     </div>
     <div class="contact-form">
@@ -868,6 +1008,35 @@
     </div>
 <div class="divider"></div>
 
+<div class="divider"></div>
+
+<!-- NEWSLETTER -->
+<section id="newsletter" class="newsletter-section">
+  <div class="newsletter-container fade-up">
+    <div class="newsletter-icon">📬</div>
+    <h2 class="newsletter-title">Stay Connected with Crystal Cliff</h2>
+    <p class="newsletter-desc">Subscribe to our newsletter and never miss school updates, event announcements, exam results, admission news and exclusive content for parents.</p>
+    <div class="newsletter-form">
+      <div class="newsletter-inputs">
+        <input type="text" class="newsletter-input" id="newsletterName" placeholder="Your full name">
+        <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Your email address">
+      </div>
+      <button class="newsletter-btn" onclick="subscribeNewsletter()">
+        Subscribe Now →
+      </button>
+    </div>
+    <div class="newsletter-perks">
+      <div class="newsletter-perk">✅ School News & Updates</div>
+      <div class="newsletter-perk">✅ Event Announcements</div>
+      <div class="newsletter-perk">✅ Admission Reminders</div>
+      <div class="newsletter-perk">✅ No Spam — Ever!</div>
+    </div>
+    <div id="newsletterSuccess" class="newsletter-success" style="display:none;">
+      🎉 Thank you for subscribing! Welcome to the Crystal Cliff family!
+    </div>
+  </div>
+</section>
+
 <section id="contact">
   <div class="section-label">Get In Touch</div>
   <h2 class="section-title">Contact Us</h2>
@@ -885,6 +1054,86 @@
       <div class="form-group"><label class="form-label">Subject</label><input class="form-input" type="text" placeholder="How can we help?"></div>
       <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Type your message here..." style="height:140px;"></textarea></div>
       <button class="form-submit" onclick="sendMessage()">Send Message →</button>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- WHATSAPP ENQUIRY FORM -->
+<section id="enquiry" class="enquiry-section">
+  <div class="section-label">Quick Enquiry</div>
+  <h2 class="section-title">Send Us a Message on WhatsApp</h2>
+  <p class="section-sub">Fill the form below and we will open WhatsApp with your message ready to send — fast, easy and direct!</p>
+
+  <div class="enquiry-container fade-up">
+    <div class="enquiry-left">
+      <div class="enquiry-info">
+        <div class="enquiry-info-icon">⚡</div>
+        <div>
+          <div class="enquiry-info-title">Instant Response</div>
+          <div class="enquiry-info-desc">We typically respond within 30 minutes during school hours.</div>
+        </div>
+      </div>
+      <div class="enquiry-info">
+        <div class="enquiry-info-icon">🕐</div>
+        <div>
+          <div class="enquiry-info-title">Available Hours</div>
+          <div class="enquiry-info-desc">Monday – Friday: 7:30 AM – 5:00 PM. Saturday: 9:00 AM – 1:00 PM.</div>
+        </div>
+      </div>
+      <div class="enquiry-info">
+        <div class="enquiry-info-icon">📞</div>
+        <div>
+          <div class="enquiry-info-title">Call Us Directly</div>
+          <div class="enquiry-info-desc">+234 803 898 2612 — School Office<br>+234 903 645 9685 — Principal</div>
+        </div>
+      </div>
+      <div class="enquiry-info">
+        <div class="enquiry-info-icon">💬</div>
+        <div>
+          <div class="enquiry-info-title">What to Ask Us</div>
+          <div class="enquiry-info-desc">Admissions, fees, school visits, scholarships, bus routes and more.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="enquiry-form-box">
+      <div class="enquiry-form-header">
+        <div class="whatsapp-logo">💬</div>
+        <div>
+          <div class="enquiry-form-title">WhatsApp Enquiry</div>
+          <div class="enquiry-form-sub">Opens WhatsApp automatically</div>
+        </div>
+      </div>
+
+      <div class="enquiry-form">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input class="form-input" type="text" id="wName" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input class="form-input" type="tel" id="wPhone" placeholder="+234 xxx xxx xxxx">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Enquiry Type</label>
+          <select class="form-select" id="wType">
+            <option>Admission Enquiry</option>
+            <option>School Fees</option>
+            <option>School Visit / Tour</option>
+            <option>Scholarship Information</option>
+            <option>Bus Service</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Your Message</label>
+          <textarea class="form-textarea" id="wMessage" placeholder="Type your question or message here..."></textarea>
+        </div>
+        <button class="whatsapp-send-btn" onclick="sendWhatsAppEnquiry()">
+          💬 Send via WhatsApp →
+        </button>
+      </div>
     </div>
   </div>
 </section>
@@ -917,12 +1166,36 @@
       <a class="social-btn" href="#">▶️</a>
     </div>
   </div>
+  <!-- VISITOR COUNTER -->
+<div class="visitor-counter fade-up">
+  <div class="visitor-counter-inner">
+    <div class="visitor-item">
+      <div class="visitor-icon">👥</div>
+      <div class="visitor-num" id="totalVisitors">0</div>
+      <div class="visitor-label">Total Visitors</div>
+    </div>
+    <div class="visitor-divider"></div>
+    <div class="visitor-item">
+      <div class="visitor-icon">🟢</div>
+      <div class="visitor-num" id="onlineVisitors">0</div>
+      <div class="visitor-label">Online Now</div>
+    </div>
+    <div class="visitor-divider"></div>
+    <div class="visitor-item">
+      <div class="visitor-icon">📅</div>
+      <div class="visitor-num" id="todayVisitors">0</div>
+      <div class="visitor-label">Today's Visitors</div>
+    </div>
+  </div>
+</div> 
 </footer>
 <!-- WHATSAPP BUTTON -->
 <a href="https://wa.me/2348038982612" target="_blank" class="whatsapp-btn" id="whatsappBtn">
   <div class="whatsapp-icon">💬</div>
   <div class="whatsapp-text">Chat with us</div>
 </a>
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
 <script src="script.js"></script>
 </body>
 </html>
