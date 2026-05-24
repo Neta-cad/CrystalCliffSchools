@@ -70,7 +70,7 @@ nav {
 .mobile-menu a { color: var(--muted); text-decoration: none; font-size: 0.9rem; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .mobile-menu.active { display: flex; }
 
-.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 120px 60px 80px; position: relative; overflow: hidden; text-align: center; }
+.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 180px 60px 80px; position: relative; overflow: hidden; text-align: center; }
 .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(0,212,255,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 20% 80%, rgba(124,58,237,0.08) 0%, transparent 60%); }
 .hero-bg::after { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px); background-size: 60px 60px; }
 .hero-content { position: relative; z-index: 2; max-width: 800px; }
@@ -499,20 +499,18 @@ iframe {
 }
 /* ANNOUNCEMENT BANNER */
 .announcement-banner {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative;
   background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(124,58,237,0.15));
+  border-top: 1px solid rgba(0,212,255,0.3);
   border-bottom: 1px solid rgba(0,212,255,0.3);
   backdrop-filter: blur(20px);
-  z-index: 10000;
-  padding: 10px 20px;
+  z-index: 1;
+  padding: 14px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  animation: slideDown 0.5s ease both;
+  width: 100%;
 }
 
 @keyframes slideDown {
@@ -1187,4 +1185,17 @@ nav {
   font-size: 1rem;
   padding: 4px 8px;
   flex-shrink: 0;
+}
+/* FORCE BANNER TO BOTTOM OF HERO */
+#announcementBanner {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  width: 100% !important;
+  z-index: 1 !important;
+}
+.hero-badge {
+  margin-top: 40px !important;
+  margin-bottom: 28px !important;
 }

@@ -1,4 +1,9 @@
 // Scroll progress bar
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('scrollBar').style.width = (scrollTop / docHeight * 100) + '%';
+});
 
 // Fade up animations
 const observer = new IntersectionObserver((entries) => {
@@ -52,16 +57,7 @@ function closeBanner() {
 
 
 
-  // Theme
-  const savedTheme = localStorage.getItem('crystalcliff-theme');
-  if (savedTheme === 'light') {
-    document.body.classList.add('light');
-    const btn = document.getElementById('themeToggle');
-    if (btn) btn.textContent = '☀️';
-  }
 
-  // Visitor counter
-  initVisitorCounter();
 // Page Loader
 const pageLoader = document.getElementById('pageLoader');
 const loaderBar = document.getElementById('loaderBar');
@@ -454,3 +450,15 @@ _Sent from Crystal Cliff Schools Website_`;
 
   window.open(whatsappURL, '_blank');
 }
+// Load event
+window.addEventListener('load', () => {
+  // Theme
+  const savedTheme = localStorage.getItem('crystalcliff-theme');
+  if (savedTheme === 'light') {
+    document.body.classList.add('light');
+    const btn = document.getElementById('themeToggle');
+    if (btn) btn.textContent = '☀️';
+  }
+  // Visitor counter
+  initVisitorCounter();
+});
