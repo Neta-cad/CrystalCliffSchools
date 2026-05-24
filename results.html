@@ -400,10 +400,10 @@
 <body>
 
 <nav>
-  <a href="Portal.html" class="nav-logo">✨ CrystalHub</a>
+  <a href="portal.html" class="nav-logo">✨ CrystalHub</a>
   <div class="nav-right">
     <span class="nav-user" id="navUser"></span>
-    <a href="Portal.html" class="nav-back">← Dashboard</a>
+    <a href="portal.html" class="nav-back">← Dashboard</a>
     <button class="logout-btn" onclick="logout()">Logout</button>
   </div>
 </nav>
@@ -880,7 +880,7 @@
   function logout() {
     localStorage.removeItem('ccs_token');
     localStorage.removeItem('ccs_user');
-    window.location.href = 'Portal.html';
+    window.location.href = 'portal.html';
   }
 
   // Init
@@ -889,7 +889,7 @@
     const userStr = localStorage.getItem('ccs_user');
 
     if (!token || !userStr) {
-      window.location.href = 'Portal.html';
+      window.location.href = 'portal.html';
       return;
     }
 
