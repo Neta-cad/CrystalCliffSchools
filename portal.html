@@ -602,6 +602,7 @@
       <p>Here's what's happening with your academics today.</p>
     </div>
    <div class="dash-card" onclick="window.location.href='results.html'">
+  <div class="dash-card" onclick="window.location.href='results.html'">
   <div class="dash-card-icon">📊</div>
   <div class="dash-card-title">My Results</div>
   <div class="dash-card-desc">View your exam scores and grades</div>
@@ -657,10 +658,11 @@
     </div>
     <div class="dashboard-cards">
       <div class="dash-card">
-        <div class="dash-card-icon">📊</div>
-        <div class="dash-card-title">Add Results</div>
-        <div class="dash-card-desc">Enter student exam scores</div>
-      </div>
+        <div class="dash-card" onclick="window.location.href='results.html'">
+  <div class="dash-card-icon">📊</div>
+  <div class="dash-card-title">Add Results</div>
+  <div class="dash-card-desc">Enter student exam scores</div>
+</div>
       <div class="dash-card">
         <div class="dash-card-icon">📝</div>
         <div class="dash-card-title">Assignments</div>
@@ -718,6 +720,7 @@
         <div class="dash-card-desc">Manage students and teachers</div>
       </div>
       <div class="dash-card" onclick="window.location.href='results.html'">
+ <div class="dash-card" onclick="window.location.href='results.html'">
   <div class="dash-card-icon">📊</div>
   <div class="dash-card-title">Results</div>
   <div class="dash-card-desc">View all student results</div>
@@ -948,10 +951,10 @@
       return;
     }
 
-    // Store session
-    localStorage.setItem('ccs_token', data.access_token);
-    localStorage.setItem('ccs_user', JSON.stringify(profile));
-
+// Store session
+localStorage.setItem('ccs_token', data.access_token);
+localStorage.setItem('ccs_refresh', data.refresh_token);
+localStorage.setItem('ccs_user', JSON.stringify(profile));
     // Show dashboard
     showDashboard(profile);
   }
