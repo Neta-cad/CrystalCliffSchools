@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script> 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crystal Cliff Schools | portal</title>
@@ -755,6 +756,8 @@
 </div>
 
 <script>
+  // EmailJS Setup
+emailjs.init('8cw7ytwOmOiQcy7Te');
   // Supabase Config
   const SUPABASE_URL = 'https://cyeretlyfxmponybizrm.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5ZXJldGx5ZnhtcG9ueWJpenJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2MjIzNzUsImV4cCI6MjA5NTE5ODM3NX0.pVmmH34yJB74UjfWwVwT0odyP5_6Y0qgsp-Hq3Pqutg';
@@ -917,15 +920,25 @@ async function registerUser(email, password) {
   });
 
   if (profileRes.ok) {
-    showSuccess('✅ Account created successfully! You can now login.');
+    // Send welcome email
+    emailjs.send('service_al145pc', 'template_tohluok', {
+      to_name: fullName,
+      to_email: email,
+      role: currentRole,
+    }).then(() => {
+      console.log('Welcome email sent!');
+    }).catch((err) => {
+      console.log('Email error:', err);
+    });
+
+    showSuccess('✅ Account created! Check your email for a welcome message.');
   } else {
     const err = await profileRes.json();
-    showSuccess('✅ Auth account created! Please login now.');
+    showSuccess('✅ Account created! Please login now.');
     console.log('Profile error:', err);
   }
 
   setTimeout(() => toggleAuthMode(), 2000);
-}
 
   // Login user
   async function loginUser(email, password) {
