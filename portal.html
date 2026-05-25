@@ -929,68 +929,71 @@ async function registerUser(email, password) {
 
   // Login user
   async function loginUser(email, password) {
-    const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_KEY
-      },
-      body: JSON.stringify({ email, password })
-    });
-
-    const data = await res.json();
-
-    if (data.error || data.error_description) {
-      showError(data.error_description || data.error || 'Invalid email or password!');
-      return;
-    }
-
-// Get user profile
-const profileRes = await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&select=*`, {
-  headers: {
-    'apikey': SUPABASE_KEY,
-    'Authorization': `Bearer ${data.access_token}`
-  }
-});
-
-const profiles = await profileRes.json();
-const profile = profiles[0];
-
-if (!profile) {
-  // Create profile if missing
-  const newProfile = {
-    id: data.user.id,
-    full_name: data.user.user_metadata?.full_name || email.split('@')[0],
-    email: email,
-    role: currentRole,
-    class: data.user.user_metadata?.class || '',
-    phone: data.user.user_metadata?.phone || ''
-  };
-
-  await fetch(`${SUPABASE_URL}/rest/v1/users`, {
+  const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${data.access_token}`,
-      'Prefer': 'return=minimal'
+      'apikey': SUPABASE_KEY
     },
-    body: JSON.stringify(newProfile)
+    body: JSON.stringify({ email, password })
   });
 
-  localStorage.setItem('ccs_token', data.access_token);
-  localStorage.setItem('ccs_user', JSON.stringify(newProfile));
-  showDashboard(newProfile);
-  return;
-}
+  const data = await res.json();
 
-// Store session
-localStorage.setItem('ccs_token', data.access_token);
-localStorage.setItem('ccs_refresh', data.refresh_token);
-localStorage.setItem('ccs_user', JSON.stringify(profile));
-    // Show dashboard
-    showDashboard(profile);
+  if (data.error || data.error_description) {
+    showError(data.error_description || data.error || 'Invalid email or password!');
+    return;
   }
+
+  const accessToken = data.access_token;
+  const userId = data.user?.id || data.id;
+
+  // Get user profile
+  const profileRes = await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&select=*`, {
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${accessToken}`
+    }
+  });
+
+  const profiles = await profileRes.json();
+  let profile = profiles[0];
+
+  if (!profile) {
+    // Create profile if missing
+    profile = {
+      id: userId,
+      full_name: email.split('@')[0],
+      email: email,
+      role: currentRole,
+      class: '',
+      phone: ''
+    };
+
+    await fetch(`${SUPABASE_URL}/rest/v1/users`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${accessToken}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(profile)
+    });
+  }
+
+  if (profile.role !== currentRole) {
+    showError(`This account is registered as a ${profile.role}. Please select the correct role!`);
+    return;
+  }
+
+  // Save session
+  localStorage.setItem('ccs_token', accessToken);
+  localStorage.setItem('ccs_user', JSON.stringify(profile));
+
+  // Show dashboard
+  showDashboard(profile);
+}
 
   // Show dashboard
   function showDashboard(profile) {
