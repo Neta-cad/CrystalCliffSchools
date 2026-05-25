@@ -885,13 +885,17 @@
 
   // Init
   window.addEventListener('load', () => {
-    token = localStorage.getItem('ccs_token');
-    const userStr = localStorage.getItem('ccs_user');
+  token = localStorage.getItem('ccs_token');
+  const userStr = localStorage.getItem('ccs_user');
 
-    if (!token || !userStr) {
-      window.location.href = 'portal.html';
-      return;
-    }
+  console.log('Token:', token);
+  console.log('User:', userStr);
+
+  if (!token || !userStr) {
+    alert('Session lost! Token: ' + token + ' User: ' + userStr);
+    window.location.href = 'portal.html';
+    return;
+  }
 
     currentUser = JSON.parse(userStr);
     document.getElementById('navUser').textContent = currentUser.full_name || currentUser.email;
