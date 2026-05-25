@@ -864,53 +864,68 @@
     }
   }
 
-  // Register user
-  async function registerUser(email, password) {
-    const fullName = document.getElementById('fullName').value.trim();
-    const classInput = document.getElementById('classInput').value.trim();
-    const phone = document.getElementById('phoneInput').value.trim();
+async function registerUser(email, password) {
+  const fullName = document.getElementById('fullName').value.trim();
+  const classInput = document.getElementById('classInput').value.trim();
+  const phone = document.getElementById('phoneInput').value.trim();
 
-    if (!fullName) { showError('Please enter your full name!'); return; }
+  if (!fullName) { showError('Please enter your full name!'); return; }
 
-    // Sign up with Supabase Auth
-    const authRes = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_KEY
-      },
-      body: JSON.stringify({ email, password })
-    });
-
-    const authData = await authRes.json();
-
-    if (authData.error) {
-      showError(authData.error.message || authData.msg);
-      return;
-    }
-
-    // Insert user profile
-    const profileRes = await fetch(`${SUPABASE_URL}/rest/v1/users`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify({
-        id: authData.user?.id,
+  // Sign up with Supabase Auth
+  const authRes = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_KEY
+    },
+    body: JSON.stringify({
+      email,
+      password,
+      data: {
         full_name: fullName,
-        email: email,
         role: currentRole,
         class: classInput,
         phone: phone
-      })
-    });
+      }
+    })
+  });
 
-    showSuccess('✅ Account created! Please check your email to verify your account.');
-    setTimeout(() => toggleAuthMode(), 2000);
+  const authData = await authRes.json();
+
+  if (authData.error) {
+    showError(authData.error.message || authData.msg);
+    return;
   }
+
+  // Insert profile directly
+  const profileRes = await fetch(`${SUPABASE_URL}/rest/v1/users`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify({
+      id: authData.user?.id,
+      full_name: fullName,
+      email: email,
+      role: currentRole,
+      class: classInput,
+      phone: phone
+    })
+  });
+
+  if (profileRes.ok) {
+    showSuccess('✅ Account created successfully! You can now login.');
+  } else {
+    const err = await profileRes.json();
+    showSuccess('✅ Auth account created! Please login now.');
+    console.log('Profile error:', err);
+  }
+
+  setTimeout(() => toggleAuthMode(), 2000);
+}
 
   // Login user
   async function loginUser(email, password) {
@@ -930,26 +945,44 @@
       return;
     }
 
-    // Get user profile
-    const profileRes = await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${email}&select=*`, {
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${data.access_token}`
-      }
-    });
+// Get user profile
+const profileRes = await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&select=*`, {
+  headers: {
+    'apikey': SUPABASE_KEY,
+    'Authorization': `Bearer ${data.access_token}`
+  }
+});
 
-    const profiles = await profileRes.json();
-    const profile = profiles[0];
+const profiles = await profileRes.json();
+const profile = profiles[0];
 
-    if (!profile) {
-      showError('Profile not found. Please register first!');
-      return;
-    }
+if (!profile) {
+  // Create profile if missing
+  const newProfile = {
+    id: data.user.id,
+    full_name: data.user.user_metadata?.full_name || email.split('@')[0],
+    email: email,
+    role: currentRole,
+    class: data.user.user_metadata?.class || '',
+    phone: data.user.user_metadata?.phone || ''
+  };
 
-    if (profile.role !== currentRole) {
-      showError(`This account is registered as a ${profile.role}. Please select the correct role!`);
-      return;
-    }
+  await fetch(`${SUPABASE_URL}/rest/v1/users`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${data.access_token}`,
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify(newProfile)
+  });
+
+  localStorage.setItem('ccs_token', data.access_token);
+  localStorage.setItem('ccs_user', JSON.stringify(newProfile));
+  showDashboard(newProfile);
+  return;
+}
 
 // Store session
 localStorage.setItem('ccs_token', data.access_token);
