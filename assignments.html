@@ -101,12 +101,13 @@
   let currentUser = null;
   let token = null;
 
-  async function fetchData(endpoint, options = {}) {
+async function fetchData(endpoint, options = {}) {
+    const authToken = localStorage.getItem('ccs_token') || token;
     const res = await fetch(`${SUPABASE_URL}/rest/v1/${endpoint}`, {
       ...options,
       headers: {
         'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${authToken}`,
         'Content-Type': 'application/json',
         'Prefer': 'return=representation',
         ...options.headers
@@ -212,32 +213,39 @@
       return;
     }
 
-    const result = await fetchData('assignments', {
-      method: 'POST',
-      body: JSON.stringify({
-        title,
-        description: desc,
-        subject,
-        class: className,
-        due_date: dueDate,
-        max_score: maxScore,
-        teacher_id: currentUser.id
-      })
-    });
+    const authToken = localStorage.getItem('ccs_token');
+const res = await fetch(`${SUPABASE_URL}/rest/v1/assignments`, {
+  method: 'POST',
+  headers: {
+    'apikey': SUPABASE_KEY,
+    'Authorization': `Bearer ${SUPABASE_KEY}`,
+    'Content-Type': 'application/json',
+    'Prefer': 'return=representation'
+  },
+  body: JSON.stringify({
+    title,
+    description: desc,
+    subject,
+    class_name: className,
+    due_date: dueDate,
+    max_score: maxScore,
+    teacher_id: currentUser.id
+  })
+});
+const result = await res.json();
 
-    if (result && result[0]) {
-      successEl.textContent = '✅ Assignment created successfully!';
-      successEl.style.display = 'block';
-      document.getElementById('assignTitle').value = '';
-      document.getElementById('assignDesc').value = '';
-      document.getElementById('assignSubject').value = '';
-      document.getElementById('assignClass').value = '';
-      document.getElementById('assignDue').value = '';
-    } else {
-      errorEl.textContent = 'Failed to create assignment. Try again!';
-      errorEl.style.display = 'block';
-    }
-  }
+    if (result && !result.error && !result.code) {
+  successEl.textContent = '✅ Assignment created successfully!';
+  successEl.style.display = 'block';
+  document.getElementById('assignTitle').value = '';
+  document.getElementById('assignDesc').value = '';
+  document.getElementById('assignSubject').value = '';
+  document.getElementById('assignClass').value = '';
+  document.getElementById('assignDue').value = '';
+} else {
+  errorEl.textContent = 'Error: ' + JSON.stringify(result);
+  errorEl.style.display = 'block';
+}
 
   async function loadTeacherAssignments() {
     const container = document.getElementById('teacherAssignments');
@@ -266,7 +274,7 @@
         <div class="assignment-desc">${a.description}</div>
         <div class="assignment-meta">
           <span>📚 ${a.subject}</span>
-          <span>👥 ${a.class}</span>
+          <span>👥 ${a.class_name}</span>
           <span>📅 Due: ${formatDate(a.due_date)}</span>
           <span>🎯 Max Score: ${a.max_score || 100}</span>
         </div>
@@ -310,7 +318,7 @@
     // Get student class
     const studentClass = currentUser.class || '';
     let endpoint = `assignments?order=due_date.asc`;
-    if (studentClass) endpoint = `assignments?class=eq.${encodeURIComponent(studentClass)}&order=due_date.asc`;
+    if (studentClass) endpoint = `assignments?class_name=eq.${encodeURIComponent(studentClass)}&order=due_date.asc`;
 
     const assignments = await fetchData(endpoint);
 
@@ -337,7 +345,7 @@
           <div class="assignment-desc">${a.description}</div>
           <div class="assignment-meta">
             <span>📚 ${a.subject}</span>
-            <span>👥 ${a.class}</span>
+            <span>👥 ${a.class_name}</span>
             <span>📅 Due: ${formatDate(a.due_date)}</span>
             <span>🎯 Max Score: ${a.max_score || 100}</span>
           </div>
@@ -403,7 +411,7 @@
         <div class="assignment-desc">${a.description}</div>
         <div class="assignment-meta">
           <span>📚 ${a.subject}</span>
-          <span>👥 ${a.class}</span>
+         <span>👥 ${a.class_name}</span>
           <span>📅 Due: ${formatDate(a.due_date)}</span>
         </div>
         <div class="assignment-actions">
