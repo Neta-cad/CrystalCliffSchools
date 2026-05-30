@@ -445,6 +445,14 @@ const result = await res.json();
       loadStudentView();
     } else if (currentUser.role === 'admin') {
       loadAdminView();
+    } else {
+      document.getElementById('mainContent').innerHTML = `
+        <div style="text-align:center; padding:60px 20px;">
+          <div style="font-size:3rem;">⚠️</div>
+          <h2 style="font-family:'Syne',sans-serif; margin:16px 0 8px;">Role not found</h2>
+          <p style="color:var(--muted);">Your account role is: ${currentUser.role || 'unknown'}</p>
+          <a href="portal.html" style="color:var(--accent);">← Go back and login again</a>
+        </div>`;
     }
   });
 </script>
