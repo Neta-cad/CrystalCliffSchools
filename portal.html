@@ -477,14 +477,14 @@
     let profile = profiles[0];
 
     if (!profile) {
-      profile = {
-        id: data.user?.id,
-        full_name: email.split('@')[0],
-        email: email,
-        role: currentRole,
-        class: '',
-        phone: ''
-      };
+  profile = {
+    id: data.user?.id || '',
+    full_name: email.split('@')[0] || 'User',
+    email: email,
+    role: currentRole,
+    class: '',
+    phone: ''
+  };
       await fetch(`${SUPABASE_URL}/rest/v1/users`, {
         method: 'POST',
         headers: {
@@ -512,9 +512,9 @@ alert('Token: ' + accessToken.substring(0, 30));
 
   function showDashboard(profile) {
     document.getElementById('loginPage').style.display = 'none';
-    const initials = profile.full_name
+    const initials = (profile.full_name && profile.full_name.length > 0)
       ? profile.full_name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()
-      : profile.role[0].toUpperCase();
+      : (profile.email ? profile.email[0].toUpperCase() : 'U');
 
     if (profile.role === 'student') {
       document.getElementById('studentDashboard').classList.add('active');
