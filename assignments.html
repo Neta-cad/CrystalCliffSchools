@@ -157,7 +157,109 @@ async function fetchData(endpoint, options = {}) {
             </div>
             <div class="form-group">
               <label class="form-label">Subject</label>
-              <input class="form-input" type="text" id="assignSubject" placeholder="e.g. Mathematics">
+<select class="form-select" id="assignSubject">
+  <option value="">Select Subject</option>
+  
+  <optgroup label="🍼 NURSERY (Nursery 1 – 3)">
+    <option>Number Work</option>
+    <option>Letter Work / Phonics</option>
+    <option>Oral English</option>
+    <option>Pre-Writing Skills</option>
+    <option>Reading Readiness</option>
+    <option>Rhymes and Songs</option>
+    <option>Health Habits / Hygiene</option>
+    <option>Social Habits</option>
+    <option>Religious Studies (CRS/IRS) - Nursery</option>
+    <option>Creative Arts - Nursery</option>
+    <option>Physical Education - Nursery</option>
+    <option>Nature Study / Environmental Awareness</option>
+  </optgroup>
+
+  <optgroup label="📚 PRIMARY (Primary 1 – 6)">
+    <option>English Studies</option>
+    <option>Mathematics - Primary</option>
+    <option>Basic Science and Technology</option>
+    <option>Social Studies - Primary</option>
+    <option>Civic Education - Primary</option>
+    <option>Religious Studies (CRS/IRS) - Primary</option>
+    <option>Yoruba - Primary</option>
+    <option>Igbo - Primary</option>
+    <option>Hausa - Primary</option>
+    <option>Cultural and Creative Arts (CCA) - Primary</option>
+    <option>Physical and Health Education (PHE) - Primary</option>
+    <option>Computer Studies / ICT - Primary</option>
+    <option>Agricultural Science - Primary</option>
+    <option>Verbal Reasoning</option>
+    <option>Quantitative Reasoning</option>
+  </optgroup>
+
+  <optgroup label="🎒 JSS (JSS 1 – 3)">
+    <option>English Language - JSS</option>
+    <option>Mathematics - JSS</option>
+    <option>Basic Science - JSS</option>
+    <option>Basic Technology</option>
+    <option>Social Studies - JSS</option>
+    <option>Civic Education - JSS</option>
+    <option>Computer Studies / ICT - JSS</option>
+    <option>Cultural and Creative Arts (CCA) - JSS</option>
+    <option>Agricultural Science - JSS</option>
+    <option>Business Studies</option>
+    <option>Physical and Health Education (PHE) - JSS</option>
+    <option>Religious Studies (CRS/IRS) - JSS</option>
+    <option>Yoruba - JSS</option>
+    <option>Igbo - JSS</option>
+    <option>Hausa - JSS</option>
+    <option>Security Education</option>
+  </optgroup>
+
+  <optgroup label="🎓 SSS CORE (SSS 1 – 3)">
+    <option>English Language</option>
+    <option>Mathematics</option>
+    <option>Civic Education</option>
+    <option>Computer Studies / Data Processing</option>
+  </optgroup>
+
+  <optgroup label="🔬 SSS SCIENCE">
+    <option>Physics</option>
+    <option>Chemistry</option>
+    <option>Biology</option>
+    <option>Further Mathematics</option>
+    <option>Agricultural Science</option>
+    <option>Technical Drawing</option>
+    <option>Health Science</option>
+  </optgroup>
+
+  <optgroup label="📊 SSS COMMERCIAL">
+    <option>Accounting</option>
+    <option>Commerce</option>
+    <option>Economics</option>
+    <option>Marketing</option>
+    <option>Insurance</option>
+    <option>Office Practice / Management</option>
+  </optgroup>
+
+  <optgroup label="🎨 SSS ARTS">
+    <option>Literature-in-English</option>
+    <option>Government</option>
+    <option>Christian Religious Studies (CRS)</option>
+    <option>Islamic Studies (IRS)</option>
+    <option>History</option>
+    <option>Fine Arts</option>
+    <option>Music</option>
+    <option>French</option>
+    <option>Yoruba</option>
+    <option>Igbo</option>
+    <option>Hausa</option>
+  </optgroup>
+
+  <optgroup label="🧾 ELECTIVE / GENERAL">
+    <option>Data Processing</option>
+    <option>Food and Nutrition / Catering Craft</option>
+    <option>Clothing and Textile</option>
+    <option>Entrepreneurship Studies</option>
+    <option>Physical Education</option>
+  </optgroup>
+</select>
             </div>
             <div class="form-group">
               <label class="form-label">Class</label>
