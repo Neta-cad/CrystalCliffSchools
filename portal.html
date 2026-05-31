@@ -511,25 +511,29 @@ console.log('Token saved:', accessToken.substring(0, 50));
   }
 
   function showDashboard(profile) {
-    document.getElementById('loginPage').style.display = 'none';
-    const initials = (profile.full_name && profile.full_name.length > 0)
-      ? profile.full_name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()
-      : (profile.email ? profile.email[0].toUpperCase() : 'U');
-
-    if (profile.role === 'student') {
-      document.getElementById('studentDashboard').classList.add('active');
-      document.getElementById('studentAvatar').textContent = initials;
-      document.getElementById('studentName').textContent = profile.full_name || 'Student';
-    } else if (profile.role === 'teacher') {
-      document.getElementById('teacherDashboard').classList.add('active');
-      document.getElementById('teacherAvatar').textContent = initials;
-      document.getElementById('teacherName').textContent = profile.full_name || 'Teacher';
-    } else if (profile.role === 'admin') {
-      document.getElementById('adminDashboard').classList.add('active');
-      document.getElementById('adminAvatar').textContent = initials;
-      document.getElementById('adminName').textContent = profile.full_name || 'Admin';
-    }
+  document.getElementById('loginPage').style.display = 'none';
+  
+  let initials = 'U';
+  if (profile.full_name && profile.full_name.trim().length > 0) {
+    initials = profile.full_name.trim().split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+  } else if (profile.email && profile.email.length > 0) {
+    initials = profile.email[0].toUpperCase();
   }
+
+  if (profile.role === 'student') {
+    document.getElementById('studentDashboard').classList.add('active');
+    document.getElementById('studentAvatar').textContent = initials;
+    document.getElementById('studentName').textContent = profile.full_name || 'Student';
+  } else if (profile.role === 'teacher') {
+    document.getElementById('teacherDashboard').classList.add('active');
+    document.getElementById('teacherAvatar').textContent = initials;
+    document.getElementById('teacherName').textContent = profile.full_name || 'Teacher';
+  } else if (profile.role === 'admin') {
+    document.getElementById('adminDashboard').classList.add('active');
+    document.getElementById('adminAvatar').textContent = initials;
+    document.getElementById('adminName').textContent = profile.full_name || 'Admin';
+  }
+}
 
   function goTo(page) {
     window.location.href = page;
