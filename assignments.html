@@ -317,13 +317,18 @@ const result = await res.json();
     container.innerHTML = '<div class="loading-spinner">⏳ Loading...</div>';
 
     // Get student class
-    const studentClass = currentUser.class || '';
-    let endpoint = `assignments?order=due_date.asc`;
-    if (studentClass) endpoint = `assignments?class_name=eq.${encodeURIComponent(studentClass)}&order=due_date.asc`;
+    const studentClass = currentUser.class || currentUser.class_name || '';
+let endpoint = `assignments?order=due_date.asc`;
+if (studentClass) endpoint = `assignments?class_name=eq.${encodeURIComponent(studentClass)}&order=due_date.asc`;
 
     const assignments = await fetchData(endpoint);
 
-    if (!assignments || assignments.length === 0) {
+if (!assignments || assignments.error || assignments.code) {
+  container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">📝</div><h3>No Assignments Yet</h3><p>No assignments have been posted yet.</p></div>`;
+  return;
+}
+
+if (assignments.length === 0) {
       container.innerHTML = `
         <div class="empty-state">
           <div class="empty-state-icon">📝</div>
