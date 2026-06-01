@@ -18,13 +18,15 @@
       --muted: #94a3b8;
       --border: #1e293b;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* ── LOGIN PAGE ── */
     nav { padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; background: rgba(8,12,20,0.95); border-bottom: 1px solid rgba(0,212,255,0.08); backdrop-filter: blur(20px); }
     .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--accent); text-decoration: none; }
     .nav-logo span { color: var(--text); }
     .nav-back { color: var(--muted); text-decoration: none; font-size: 0.85rem; }
-    .nav-back:hover { color: var(--accent); }
     .portal-main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; position: relative; overflow: hidden; }
     .portal-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,212,255,0.06) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 80% 80%, rgba(124,58,237,0.08) 0%, transparent 60%); }
     .portal-container { position: relative; z-index: 2; width: 100%; max-width: 440px; }
@@ -34,7 +36,6 @@
     .portal-subtitle { color: var(--muted); font-size: 0.88rem; }
     .role-selector { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 28px; }
     .role-btn { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 8px; text-align: center; cursor: pointer; transition: all 0.2s; }
-    .role-btn:hover { border-color: rgba(0,212,255,0.3); }
     .role-btn.active { border-color: var(--accent); background: rgba(0,212,255,0.08); }
     .role-icon { font-size: 1.5rem; margin-bottom: 6px; }
     .role-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.78rem; color: var(--text); }
@@ -62,30 +63,412 @@
     .loading { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(0,0,0,0.3); border-top-color: #000; border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 8px; vertical-align: middle; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .portal-footer { text-align: center; padding: 20px; color: var(--muted); font-size: 0.78rem; border-top: 1px solid var(--border); }
+
+    /* ── DASHBOARD LAYOUT ── */
     .dashboard { display: none; }
-    .dashboard.active { display: block; min-height: 100vh; }
-    .dashboard-nav { padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; background: rgba(8,12,20,0.95); border-bottom: 1px solid rgba(0,212,255,0.08); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 99; }
-    .dashboard-nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; color: var(--accent); }
-    .dashboard-user { display: flex; align-items: center; gap: 12px; }
-    .user-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.85rem; color: #000; }
-    .user-name { font-size: 0.85rem; font-weight: 600; }
-    .logout-btn { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.78rem; font-weight: 600; }
-    .dashboard-content { padding: 32px 24px; max-width: 1000px; margin: 0 auto; }
-    .dashboard-welcome { margin-bottom: 32px; }
-    .dashboard-welcome h1 { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; margin-bottom: 4px; }
-    .dashboard-welcome p { color: var(--muted); font-size: 0.9rem; }
-    .dashboard-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 32px; }
-    .dash-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; transition: transform 0.2s, border-color 0.2s; cursor: pointer; }
-    .dash-card:hover { transform: translateY(-4px); border-color: rgba(0,212,255,0.2); }
-    .dash-card-icon { font-size: 2rem; margin-bottom: 12px; }
-    .dash-card-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
-    .dash-card-desc { color: var(--muted); font-size: 0.75rem; }
-    .coming-soon { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; color: var(--muted); }
-    .coming-soon h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin: 12px 0 8px; color: var(--text); }
+    .dashboard.active { display: flex; min-height: 100vh; }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 240px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 24px 16px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      z-index: 100;
+      transition: transform 0.3s;
+    }
+
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+      padding: 0 8px;
+    }
+
+    .sidebar-logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: #000;
+      flex-shrink: 0;
+    }
+
+    .sidebar-logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    .sidebar-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 24px;
+    }
+
+    .sidebar-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #000;
+      flex-shrink: 0;
+    }
+
+    .sidebar-user-info { flex: 1; min-width: 0; }
+    .sidebar-user-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sidebar-user-role { color: var(--accent); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+
+    .sidebar-nav { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 500;
+      border: 1px solid transparent;
+    }
+
+    .sidebar-item:hover {
+      background: rgba(0,212,255,0.06);
+      color: var(--text);
+      border-color: rgba(0,212,255,0.1);
+    }
+
+    .sidebar-item.active {
+      background: rgba(0,212,255,0.1);
+      color: var(--accent);
+      border-color: rgba(0,212,255,0.2);
+    }
+
+    .sidebar-item-icon { font-size: 1.1rem; width: 24px; text-align: center; flex-shrink: 0; }
+    .sidebar-item-label { font-family: 'Syne', sans-serif; font-weight: 600; }
+
+    .sidebar-logout {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.15);
+      color: #ef4444;
+      font-size: 0.88rem;
+      font-weight: 600;
+      font-family: 'Syne', sans-serif;
+      margin-top: 16px;
+      transition: all 0.2s;
+    }
+
+    .sidebar-logout:hover { background: rgba(239,68,68,0.15); }
+
+    /* MAIN CONTENT */
+    .dash-main {
+      margin-left: 240px;
+      flex: 1;
+      padding: 32px 28px;
+      min-height: 100vh;
+    }
+
+    .dash-header {
+      margin-bottom: 32px;
+    }
+
+    .dash-greeting {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .dash-subtitle { color: var(--muted); font-size: 0.9rem; }
+
+    /* FEATURE CARDS GRID */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.25s;
+      border-radius: 20px;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0,212,255,0.3);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,212,255,0.1);
+    }
+
+    .feature-card:hover::before { opacity: 1; }
+
+    /* Card color variants */
+    .fc-blue { background: linear-gradient(135deg, rgba(0,212,255,0.12), rgba(0,212,255,0.04)); border-color: rgba(0,212,255,0.2); }
+    .fc-blue:hover { box-shadow: 0 20px 40px rgba(0,212,255,0.15), 0 0 0 1px rgba(0,212,255,0.3); }
+    .fc-purple { background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(124,58,237,0.04)); border-color: rgba(124,58,237,0.2); }
+    .fc-purple:hover { box-shadow: 0 20px 40px rgba(124,58,237,0.15), 0 0 0 1px rgba(124,58,237,0.3); }
+    .fc-green { background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(16,185,129,0.04)); border-color: rgba(16,185,129,0.2); }
+    .fc-green:hover { box-shadow: 0 20px 40px rgba(16,185,129,0.15), 0 0 0 1px rgba(16,185,129,0.3); }
+    .fc-orange { background: linear-gradient(135deg, rgba(249,115,22,0.12), rgba(249,115,22,0.04)); border-color: rgba(249,115,22,0.2); }
+    .fc-orange:hover { box-shadow: 0 20px 40px rgba(249,115,22,0.15), 0 0 0 1px rgba(249,115,22,0.3); }
+    .fc-yellow { background: linear-gradient(135deg, rgba(251,191,36,0.12), rgba(251,191,36,0.04)); border-color: rgba(251,191,36,0.2); }
+    .fc-yellow:hover { box-shadow: 0 20px 40px rgba(251,191,36,0.15), 0 0 0 1px rgba(251,191,36,0.3); }
+    .fc-pink { background: linear-gradient(135deg, rgba(236,72,153,0.12), rgba(236,72,153,0.04)); border-color: rgba(236,72,153,0.2); }
+    .fc-pink:hover { box-shadow: 0 20px 40px rgba(236,72,153,0.15), 0 0 0 1px rgba(236,72,153,0.3); }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+
+    .fi-blue { background: rgba(0,212,255,0.15); }
+    .fi-purple { background: rgba(124,58,237,0.15); }
+    .fi-green { background: rgba(16,185,129,0.15); }
+    .fi-orange { background: rgba(249,115,22,0.15); }
+    .fi-yellow { background: rgba(251,191,36,0.15); }
+    .fi-pink { background: rgba(236,72,153,0.15); }
+
+    .feature-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .feature-desc {
+      color: var(--muted);
+      font-size: 0.75rem;
+      line-height: 1.4;
+    }
+
+    /* INFO BANNER */
+    .info-banner {
+      background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(124,58,237,0.08));
+      border: 1px solid rgba(0,212,255,0.15);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .info-banner-icon { font-size: 2rem; flex-shrink: 0; }
+    .info-banner-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
+    .info-banner-text { color: var(--muted); font-size: 0.83rem; }
+
+    /* MOBILE HEADER */
+    .mobile-header {
+      display: none;
+      padding: 16px 20px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 99;
+    }
+
+    .mobile-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    .mobile-menu-btn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 99;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar-overlay.open { display: block; }
+      .dash-main { margin-left: 0; padding: 20px 16px; }
+      .mobile-header { display: flex; }
+      .dashboard.active { flex-direction: column; }
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    /* ENHANCED LOGIN PAGE */
+#loginPage nav {
+  background: transparent;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 16px 24px;
+}
+
+.portal-main {
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,100,255,0.15) 0%, transparent 60%),
+              radial-gradient(ellipse 60% 40% at 80% 80%, rgba(124,58,237,0.12) 0%, transparent 60%);
+}
+
+.portal-logo {
+  width: 90px !important;
+  height: 90px !important;
+  border-radius: 24px !important;
+  font-size: 1.8rem !important;
+  box-shadow: 0 0 40px rgba(0,212,255,0.4), 0 20px 60px rgba(124,58,237,0.3);
+  background: linear-gradient(135deg, #00d4ff, #7c3aed, #00d4ff) !important;
+  background-size: 200% !important;
+  animation: shimmer 3s ease infinite !important;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.portal-title {
+  font-size: 2rem !important;
+  background: linear-gradient(135deg, #fff, #a5f3ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.role-btn {
+  border-radius: 16px !important;
+  padding: 18px 8px !important;
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  transition: all 0.3s !important;
+}
+
+.role-btn.active {
+  background: rgba(0,212,255,0.1) !important;
+  border: 1px solid var(--accent) !important;
+  box-shadow: 0 0 20px rgba(0,212,255,0.2), inset 0 0 20px rgba(0,212,255,0.05) !important;
+}
+
+.role-icon { font-size: 2rem !important; margin-bottom: 8px !important; }
+
+.login-card {
+  background: rgba(13,19,33,0.8) !important;
+  backdrop-filter: blur(30px) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 24px !important;
+}
+
+.form-input {
+  background: rgba(255,255,255,0.05) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 12px !important;
+  padding: 14px 16px !important;
+  font-size: 1rem !important;
+}
+
+.form-input:focus {
+  border-color: rgba(0,212,255,0.5) !important;
+  background: rgba(0,212,255,0.04) !important;
+}
+
+.login-btn {
+  border-radius: 14px !important;
+  padding: 16px !important;
+  font-size: 1rem !important;
+  letter-spacing: 0.02em;
+  box-shadow: 0 0 30px rgba(0,212,255,0.3), 0 10px 30px rgba(124,58,237,0.2) !important;
+}
+
+/* Network animation background */
+.portal-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(0,212,255,0.05) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(124,58,237,0.05) 0%, transparent 40%);
+  animation: bgPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes bgPulse {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
   </style>
 </head>
 <body>
 
+<!-- LOGIN PAGE -->
 <div id="loginPage">
   <nav>
     <a href="index.html" class="nav-logo">Crystal<span>Cliff</span></a>
@@ -100,15 +483,15 @@
         <p class="portal-subtitle">Sign in to access your dashboard</p>
       </div>
       <div class="role-selector">
-        <div class="role-btn active" id="roleStudent" onclick="selectRole('student', this)">
+        <div class="role-btn active" onclick="selectRole('student', this)">
           <div class="role-icon">👨‍🎓</div>
           <div class="role-name">Student</div>
         </div>
-        <div class="role-btn" id="roleTeacher" onclick="selectRole('teacher', this)">
+        <div class="role-btn" onclick="selectRole('teacher', this)">
           <div class="role-icon">👨‍🏫</div>
           <div class="role-name">Teacher</div>
         </div>
-        <div class="role-btn" id="roleAdmin" onclick="selectRole('admin', this)">
+        <div class="role-btn" onclick="selectRole('admin', this)">
           <div class="role-icon">👨‍💼</div>
           <div class="role-name">Admin</div>
         </div>
@@ -155,166 +538,304 @@
 
 <!-- STUDENT DASHBOARD -->
 <div class="dashboard" id="studentDashboard">
-  <div class="dashboard-nav">
-    <div class="dashboard-nav-logo">✨ CrystalHub</div>
-    <div class="dashboard-user">
-      <div class="user-avatar" id="studentAvatar">S</div>
-      <div class="user-name" id="studentName">Student</div>
-      <button class="logout-btn" type="button" onclick="logout()">Logout</button>
+  <div class="sidebar-overlay" id="studentOverlay" onclick="closeSidebar('student')"></div>
+  <div class="sidebar" id="studentSidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">✨</div>
+      <div class="sidebar-logo-text">CrystalHub</div>
     </div>
+    <div class="sidebar-user">
+      <div class="sidebar-avatar" id="studentAvatar">S</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" id="studentName">Student</div>
+        <div class="sidebar-user-role">Student</div>
+      </div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="sidebar-item active">
+        <span class="sidebar-item-icon">🏠</span>
+        <span class="sidebar-item-label">Dashboard</span>
+      </div>
+      <div class="sidebar-item" onclick="goTo('results.html')">
+        <span class="sidebar-item-icon">📊</span>
+        <span class="sidebar-item-label">My Results</span>
+      </div>
+      <div class="sidebar-item" onclick="goTo('assignments.html')">
+        <span class="sidebar-item-icon">📝</span>
+        <span class="sidebar-item-label">Assignments</span>
+      </div>
+      <div class="sidebar-item" onclick="goTo('attendance.html')">
+        <span class="sidebar-item-icon">📅</span>
+        <span class="sidebar-item-label">Attendance</span>
+      </div>
+      <div class="sidebar-item" onclick="goTo('notes.html')">
+        <span class="sidebar-item-icon">📚</span>
+        <span class="sidebar-item-label">Lesson Notes</span>
+      </div>
+      <div class="sidebar-item">
+        <span class="sidebar-item-icon">🕐</span>
+        <span class="sidebar-item-label">Timetable</span>
+      </div>
+      <div class="sidebar-item">
+        <span class="sidebar-item-icon">💰</span>
+        <span class="sidebar-item-label">School Fees</span>
+      </div>
+    </div>
+    <button class="sidebar-logout" onclick="logout()">
+      <span>🚪</span> Log Out
+    </button>
   </div>
-  <div class="dashboard-content">
-    <div class="dashboard-welcome">
-      <h1>Welcome back! 👋</h1>
-      <p>Here's what's happening with your academics today.</p>
+  <div class="dash-main">
+    <div class="mobile-header">
+      <div class="mobile-logo">✨ CrystalHub</div>
+      <button class="mobile-menu-btn" onclick="openSidebar('student')">☰</button>
     </div>
-    <div class="dashboard-cards">
-      <div class="dash-card" onclick="goTo('results.html')">
-        <div class="dash-card-icon">📊</div>
-        <div class="dash-card-title">My Results</div>
-        <div class="dash-card-desc">View your exam scores</div>
+    <div style="padding: 20px 0 0;" class="dash-header">
+      <div class="dash-greeting">Welcome back! 👋</div>
+      <div class="dash-subtitle">Here's your academic overview for today.</div>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card fc-blue" onclick="goTo('results.html')">
+        <div class="feature-icon fi-blue">📊</div>
+        <div class="feature-title">My Results</div>
+        <div class="feature-desc">View exam scores and grades</div>
       </div>
-      <div class="dash-card" onclick="goTo('assignments.html')">
-  <div class="dash-card-icon">📝</div>
-  <div class="dash-card-title">Assignments</div>
-  <div class="dash-card-desc">Check assignments</div>
-</div>
-      <div class="dash-card" onclick="goTo('attendance.html')">
-  <div class="dash-card-icon">📅</div>
-  <div class="dash-card-title">Attendance</div>
-  <div class="dash-card-desc">View attendance record</div>
-</div>
-      <div class="dash-card">
-        <div class="dash-card-icon">📚</div>
-        <div class="dash-card-title">Lesson Notes</div>
-        <div class="dash-card-desc">Access class notes</div>
+      <div class="feature-card fc-purple" onclick="goTo('assignments.html')">
+        <div class="feature-icon fi-purple">📝</div>
+        <div class="feature-title">Assignments</div>
+        <div class="feature-desc">Check and submit work</div>
       </div>
-      <div class="dash-card">
-        <div class="dash-card-icon">🕐</div>
-        <div class="dash-card-title">Timetable</div>
-        <div class="dash-card-desc">View class schedule</div>
+      <div class="feature-card fc-green" onclick="goTo('attendance.html')">
+        <div class="feature-icon fi-green">📅</div>
+        <div class="feature-title">Attendance</div>
+        <div class="feature-desc">View attendance record</div>
       </div>
-      <div class="dash-card">
-        <div class="dash-card-icon">💰</div>
-        <div class="dash-card-title">School Fees</div>
-        <div class="dash-card-desc">Check fee status</div>
+      <div class="feature-card fc-orange" onclick="goTo('notes.html')">
+        <div class="feature-icon fi-orange">📚</div>
+        <div class="feature-title">Lesson Notes</div>
+        <div class="feature-desc">Access class materials</div>
+      </div>
+      <div class="feature-card fc-yellow">
+        <div class="feature-icon fi-yellow">🕐</div>
+        <div class="feature-title">Timetable</div>
+        <div class="feature-desc">View class schedule</div>
+      </div>
+      <div class="feature-card fc-pink">
+        <div class="feature-icon fi-pink">💰</div>
+        <div class="feature-title">School Fees</div>
+        <div class="feature-desc">Check payment status</div>
       </div>
     </div>
-    <div class="coming-soon">
-      <div style="font-size:2rem;">🚀</div>
-      <h3>More Features Coming Soon!</h3>
-      <p>Assignments and attendance tracking are being set up.</p>
+    <div class="info-banner">
+      <div class="info-banner-icon">🚀</div>
+      <div>
+        <div class="info-banner-title">More Features Coming!</div>
+        <div class="info-banner-text">Timetable and fee payment tracking are being set up. Check back soon!</div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- TEACHER DASHBOARD -->
 <div class="dashboard" id="teacherDashboard">
-  <div class="dashboard-nav">
-    <div class="dashboard-nav-logo">✨ CrystalHub</div>
-    <div class="dashboard-user">
-      <div class="user-avatar" id="teacherAvatar">T</div>
-      <div class="user-name" id="teacherName">Teacher</div>
-      <button class="logout-btn" type="button" onclick="logout()">Logout</button>
+  <div class="sidebar-overlay" id="teacherOverlay" onclick="closeSidebar('teacher')"></div>
+  <div class="sidebar" id="teacherSidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">✨</div>
+      <div class="sidebar-logo-text">CrystalHub</div>
     </div>
+    <div class="sidebar-user">
+      <div class="sidebar-avatar" id="teacherAvatar">T</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" id="teacherName">Teacher</div>
+        <div class="sidebar-user-role">Teacher</div>
+      </div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="sidebar-item active">
+        <span class="sidebar-item-icon">🏠</span>
+        <span class="sidebar-item-label">Dashboard</span>
+      </div>
+      <div class="sidebar-item" onclick="goTo('results.html')">
+        <span class="sidebar-item-icon">📊</span>
+        <span class="sidebar-item-label">Add Results</span>
+      </div>
+      <div class="sidebar-item" onclick="goTo('assignments.html')">
+        <span class="sidebar-item-icon">📝</span>
+        <span class="sidebar-item-label">Assignments</span>
+      </div>
+      <div class="sidebar-item" onclick="goTo('attendance.html')">
+        <span class="sidebar-item-icon">✅</span>
+        <span class="sidebar-item-label">Attendance</span>
+      </div>
+      <div class="sidebar-item" onclick="goTo('notes.html')">
+        <span class="sidebar-item-icon">📚</span>
+        <span class="sidebar-item-label">Lesson Notes</span>
+      </div>
+      <div class="sidebar-item">
+        <span class="sidebar-item-icon">👥</span>
+        <span class="sidebar-item-label">My Students</span>
+      </div>
+      <div class="sidebar-item">
+        <span class="sidebar-item-icon">📈</span>
+        <span class="sidebar-item-label">Reports</span>
+      </div>
+    </div>
+    <button class="sidebar-logout" onclick="logout()">
+      <span>🚪</span> Log Out
+    </button>
   </div>
-  <div class="dashboard-content">
-    <div class="dashboard-welcome">
-      <h1>Welcome, Teacher! 👨‍🏫</h1>
-      <p>Manage your classes, results and assignments.</p>
+  <div class="dash-main">
+    <div class="mobile-header">
+      <div class="mobile-logo">✨ CrystalHub</div>
+      <button class="mobile-menu-btn" onclick="openSidebar('teacher')">☰</button>
     </div>
-    <div class="dashboard-cards">
-      <div class="dash-card" onclick="goTo('results.html')">
-        <div class="dash-card-icon">📊</div>
-        <div class="dash-card-title">Add Results</div>
-        <div class="dash-card-desc">Enter student scores</div>
+    <div style="padding: 20px 0 0;" class="dash-header">
+      <div class="dash-greeting">Welcome, Teacher! 👨‍🏫</div>
+      <div class="dash-subtitle">Manage your classes, results and assignments.</div>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card fc-blue" onclick="goTo('results.html')">
+        <div class="feature-icon fi-blue">📊</div>
+        <div class="feature-title">Add Results</div>
+        <div class="feature-desc">Enter student exam scores</div>
       </div>
-     <div class="dash-card" onclick="goTo('assignments.html')">
-  <div class="dash-card-icon">📝</div>
-  <div class="dash-card-title">Assignments</div>
-  <div class="dash-card-desc">Create assignments</div>
-</div>
-<div class="dash-card" onclick="goTo('attendance.html')">
-  <div class="dash-card-icon">✅</div>
-  <div class="dash-card-title">Attendance</div>
-  <div class="dash-card-desc">Mark attendance</div>
-</div>
+      <div class="feature-card fc-purple" onclick="goTo('assignments.html')">
+        <div class="feature-icon fi-purple">📝</div>
+        <div class="feature-title">Assignments</div>
+        <div class="feature-desc">Create and manage work</div>
       </div>
-      <div class="dash-card">
-        <div class="dash-card-icon">📚</div>
-        <div class="dash-card-title">Lesson Notes</div>
-        <div class="dash-card-desc">Upload notes</div>
+      <div class="feature-card fc-green" onclick="goTo('attendance.html')">
+        <div class="feature-icon fi-green">✅</div>
+        <div class="feature-title">Attendance</div>
+        <div class="feature-desc">Mark student attendance</div>
       </div>
-      <div class="dash-card">
-        <div class="dash-card-icon">👥</div>
-        <div class="dash-card-title">My Students</div>
-        <div class="dash-card-desc">View class students</div>
+      <div class="feature-card fc-orange" onclick="goTo('notes.html')">
+        <div class="feature-icon fi-orange">📚</div>
+        <div class="feature-title">Lesson Notes</div>
+        <div class="feature-desc">Upload class materials</div>
       </div>
-      <div class="dash-card">
-        <div class="dash-card-icon">📈</div>
-        <div class="dash-card-title">Reports</div>
-        <div class="dash-card-desc">Class performance</div>
+      <div class="feature-card fc-yellow">
+        <div class="feature-icon fi-yellow">👥</div>
+        <div class="feature-title">My Students</div>
+        <div class="feature-desc">View class students</div>
+      </div>
+      <div class="feature-card fc-pink">
+        <div class="feature-icon fi-pink">📈</div>
+        <div class="feature-title">Reports</div>
+        <div class="feature-desc">Class performance</div>
       </div>
     </div>
-    <div class="coming-soon">
-      <div style="font-size:2rem;">🚀</div>
-      <h3>Features Being Activated!</h3>
-      <p>All teacher tools are being configured.</p>
+    <div class="info-banner">
+      <div class="info-banner-icon">⚙️</div>
+      <div>
+        <div class="info-banner-title">Tools Being Activated!</div>
+        <div class="info-banner-text">My Students and Reports features are being configured. Available soon!</div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ADMIN DASHBOARD -->
 <div class="dashboard" id="adminDashboard">
-  <div class="dashboard-nav">
-    <div class="dashboard-nav-logo">✨ CrystalHub</div>
-    <div class="dashboard-user">
-      <div class="user-avatar" id="adminAvatar">A</div>
-      <div class="user-name" id="adminName">Admin</div>
-      <button class="logout-btn" type="button" onclick="logout()">Logout</button>
+  <div class="sidebar-overlay" id="adminOverlay" onclick="closeSidebar('admin')"></div>
+  <div class="sidebar" id="adminSidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">✨</div>
+      <div class="sidebar-logo-text">CrystalHub</div>
     </div>
+    <div class="sidebar-user">
+      <div class="sidebar-avatar" id="adminAvatar">A</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" id="adminName">Admin</div>
+        <div class="sidebar-user-role">Administrator</div>
+      </div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="sidebar-item active">
+        <span class="sidebar-item-icon">🏠</span>
+        <span class="sidebar-item-label">Dashboard</span>
+      </div>
+      <div class="sidebar-item">
+        <span class="sidebar-item-icon">👥</span>
+        <span class="sidebar-item-label">All Users</span>
+      </div>
+      <div class="sidebar-item" onclick="goTo('results.html')">
+        <span class="sidebar-item-icon">📊</span>
+        <span class="sidebar-item-label">Results</span>
+      </div>
+      <div class="sidebar-item" onclick="goTo('assignments.html')">
+        <span class="sidebar-item-icon">📝</span>
+        <span class="sidebar-item-label">Assignments</span>
+      </div>
+      <div class="sidebar-item" onclick="goTo('attendance.html')">
+        <span class="sidebar-item-icon">📅</span>
+        <span class="sidebar-item-label">Attendance</span>
+      </div>
+      <div class="sidebar-item">
+        <span class="sidebar-item-icon">💰</span>
+        <span class="sidebar-item-label">Fees</span>
+      </div>
+      <div class="sidebar-item">
+        <span class="sidebar-item-icon">📢</span>
+        <span class="sidebar-item-label">Announcements</span>
+      </div>
+      <div class="sidebar-item">
+        <span class="sidebar-item-icon">📈</span>
+        <span class="sidebar-item-label">Reports</span>
+      </div>
+    </div>
+    <button class="sidebar-logout" onclick="logout()">
+      <span>🚪</span> Log Out
+    </button>
   </div>
-  <div class="dashboard-content">
-    <div class="dashboard-welcome">
-      <h1>Admin Dashboard 👨‍💼</h1>
-      <p>Manage all school operations.</p>
+  <div class="dash-main">
+    <div class="mobile-header">
+      <div class="mobile-logo">✨ CrystalHub</div>
+      <button class="mobile-menu-btn" onclick="openSidebar('admin')">☰</button>
     </div>
-    <div class="dashboard-cards">
-      <div class="dash-card">
-        <div class="dash-card-icon">👥</div>
-        <div class="dash-card-title">All Users</div>
-        <div class="dash-card-desc">Manage users</div>
+    <div style="padding: 20px 0 0;" class="dash-header">
+      <div class="dash-greeting">Admin Dashboard 👨‍💼</div>
+      <div class="dash-subtitle">Manage all school operations from here.</div>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card fc-blue">
+        <div class="feature-icon fi-blue">👥</div>
+        <div class="feature-title">All Users</div>
+        <div class="feature-desc">Manage students and teachers</div>
       </div>
-      <div class="dash-card" onclick="goTo('results.html')">
-        <div class="dash-card-icon">📊</div>
-        <div class="dash-card-title">Results</div>
-        <div class="dash-card-desc">View all results</div>
+      <div class="feature-card fc-purple" onclick="goTo('results.html')">
+        <div class="feature-icon fi-purple">📊</div>
+        <div class="feature-title">Results</div>
+        <div class="feature-desc">View all student results</div>
       </div>
-      <div class="dash-card">
-        <div class="dash-card-icon">💰</div>
-        <div class="dash-card-title">Fees</div>
-        <div class="dash-card-desc">Manage payments</div>
+      <div class="feature-card fc-green" onclick="goTo('assignments.html')">
+        <div class="feature-icon fi-green">📝</div>
+        <div class="feature-title">Assignments</div>
+        <div class="feature-desc">All school assignments</div>
       </div>
-      <div class="dash-card">
-        <div class="dash-card-icon">📅</div>
-        <div class="dash-card-title">Timetable</div>
-        <div class="dash-card-desc">Manage schedules</div>
+      <div class="feature-card fc-orange" onclick="goTo('attendance.html')">
+        <div class="feature-icon fi-orange">📅</div>
+        <div class="feature-title">Attendance</div>
+        <div class="feature-desc">School attendance records</div>
       </div>
-      <div class="dash-card">
-        <div class="dash-card-icon">📢</div>
-        <div class="dash-card-title">Announcements</div>
-        <div class="dash-card-desc">Post announcements</div>
+      <div class="feature-card fc-yellow">
+        <div class="feature-icon fi-yellow">💰</div>
+        <div class="feature-title">Fees</div>
+        <div class="feature-desc">Manage fee payments</div>
       </div>
-      <div class="dash-card">
-        <div class="dash-card-icon">📈</div>
-        <div class="dash-card-title">Reports</div>
-        <div class="dash-card-desc">School-wide reports</div>
+      <div class="feature-card fc-pink">
+        <div class="feature-icon fi-pink">📢</div>
+        <div class="feature-title">Announcements</div>
+        <div class="feature-desc">Post school notices</div>
       </div>
     </div>
-    <div class="coming-soon">
-      <div style="font-size:2rem;">⚙️</div>
-      <h3>Admin Tools Being Set Up!</h3>
-      <p>Full admin control panel coming soon!</p>
+    <div class="info-banner">
+      <div class="info-banner-icon">⚙️</div>
+      <div>
+        <div class="info-banner-title">Admin Tools Being Set Up!</div>
+        <div class="info-banner-text">User management and full admin control panel coming very soon!</div>
+      </div>
     </div>
   </div>
 </div>
@@ -384,21 +905,12 @@
     const email = document.getElementById('emailInput').value.trim();
     const password = document.getElementById('passwordInput').value.trim();
     const btn = document.getElementById('loginBtn');
-
-    if (!email || !password) {
-      showError('Please fill in all fields!');
-      return;
-    }
-
+    if (!email || !password) { showError('Please fill in all fields!'); return; }
     btn.disabled = true;
     btn.innerHTML = '<span class="loading"></span>' + (isRegisterMode ? 'Creating...' : 'Signing In...');
-
     try {
-      if (isRegisterMode) {
-        await registerUser(email, password);
-      } else {
-        await loginUser(email, password);
-      }
+      if (isRegisterMode) { await registerUser(email, password); }
+      else { await loginUser(email, password); }
     } catch (err) {
       showError(err.message || 'Something went wrong!');
     } finally {
@@ -411,150 +923,108 @@
     const fullName = document.getElementById('fullName').value.trim();
     const classInput = document.getElementById('classInput').value.trim();
     const phone = document.getElementById('phoneInput').value.trim();
-
     if (!fullName) { showError('Please enter your full name!'); return; }
-
     const authRes = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY },
       body: JSON.stringify({ email, password, data: { full_name: fullName, role: currentRole } })
     });
-
     const authData = await authRes.json();
     if (authData.error) { showError(authData.error.message); return; }
-
-    const profileRes = await fetch(`${SUPABASE_URL}/rest/v1/users`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify({
-        id: authData.user?.id,
-        full_name: fullName,
-        email: email,
-        role: currentRole,
-        class: classInput,
-        phone: phone
-      })
-    });
-
-    // Send welcome email
-    try {
-      emailjs.send('service_al145pc', 'template_tohluok', {
-        to_name: fullName,
-        to_email: email,
-        role: currentRole
-      });
-    } catch(e) { console.log('Email error:', e); }
-
-    showSuccess('✅ Account created! Check your email. Now sign in.');
-    setTimeout(() => toggleAuthMode(), 2000);
-  }
-
- async function loginUser(email, password) {
-  const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY },
-    body: JSON.stringify({ email, password })
-  });
-
-  const data = await res.json();
-
-  if (data.error || data.error_description) {
-    showError(data.error_description || data.error || 'Invalid email or password!');
-    return;
-  }
-
-  const accessToken = data.access_token;
-if (!accessToken) {
-  showError('Error: ' + JSON.stringify(data));
-  return;
-}
-
-  // Get user profile
-  const profileRes = await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&select=*`, {
-    headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${accessToken}`,
-      'Accept-Profile': 'public'
-    }
-  });
-
-  const profiles = await profileRes.json();
-  let profile = Array.isArray(profiles) ? profiles[0] : null;
-
-  if (!profile) {
-    profile = {
-      id: data.user?.id || '',
-      full_name: email.split('@')[0] || 'User',
-      email: email,
-      role: currentRole,
-      class: '',
-      phone: ''
-    };
-
     await fetch(`${SUPABASE_URL}/rest/v1/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${accessToken}`,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
         'Prefer': 'return=minimal',
         'Accept-Profile': 'public',
         'Content-Profile': 'public'
       },
-      body: JSON.stringify(profile)
+      body: JSON.stringify({ id: authData.user?.id, full_name: fullName, email, role: currentRole, class: classInput, phone })
     });
+    try {
+      emailjs.send('service_al145pc', 'template_tohluok', { to_name: fullName, to_email: email, role: currentRole });
+    } catch(e) {}
+    showSuccess('✅ Account created! You can now sign in.');
+    setTimeout(() => toggleAuthMode(), 2000);
   }
 
-  if (!profile.role) profile.role = currentRole;
-
-  if (profile.role !== currentRole) {
-    showError(`This account is a ${profile.role} account. Please select the correct role!`);
-    return;
+  async function loginUser(email, password) {
+    const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if (data.error || data.error_description) {
+      showError(data.error_description || data.error || 'Invalid email or password!');
+      return;
+    }
+    const accessToken = data.access_token;
+    if (!accessToken) { showError('Login failed. Please try again!'); return; }
+    const profileRes = await fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&select=*`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${accessToken}`, 'Accept-Profile': 'public' }
+    });
+    const profiles = await profileRes.json();
+    let profile = Array.isArray(profiles) ? profiles[0] : null;
+    if (!profile) {
+      profile = { id: data.user?.id || '', full_name: email.split('@')[0] || 'User', email, role: currentRole, class: '', phone: '' };
+      await fetch(`${SUPABASE_URL}/rest/v1/users`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${accessToken}`, 'Prefer': 'return=minimal', 'Accept-Profile': 'public', 'Content-Profile': 'public' },
+        body: JSON.stringify(profile)
+      });
+    }
+    if (!profile.role) profile.role = currentRole;
+    if (profile.role !== currentRole) {
+      showError(`This is a ${profile.role} account. Please select the correct role!`);
+      return;
+    }
+    localStorage.setItem('ccs_token', accessToken);
+    localStorage.setItem('ccs_user', JSON.stringify(profile));
+    showDashboard(profile);
   }
-
-  localStorage.setItem('ccs_token', accessToken);
-  localStorage.setItem('ccs_user', JSON.stringify(profile));
-  showDashboard(profile);
-}
 
   function showDashboard(profile) {
-  document.getElementById('loginPage').style.display = 'none';
-  
-  let initials = 'U';
-  if (profile.full_name && profile.full_name.trim().length > 0) {
-    initials = profile.full_name.trim().split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-  } else if (profile.email && profile.email.length > 0) {
-    initials = profile.email[0].toUpperCase();
+    document.getElementById('loginPage').style.display = 'none';
+    let initials = 'U';
+    if (profile.full_name && profile.full_name.trim().length > 0) {
+      initials = profile.full_name.trim().split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+    } else if (profile.email && profile.email.length > 0) {
+      initials = profile.email[0].toUpperCase();
+    }
+    if (profile.role === 'student') {
+      document.getElementById('studentDashboard').classList.add('active');
+      document.getElementById('studentAvatar').textContent = initials;
+      document.getElementById('studentName').textContent = profile.full_name || 'Student';
+    } else if (profile.role === 'teacher') {
+      document.getElementById('teacherDashboard').classList.add('active');
+      document.getElementById('teacherAvatar').textContent = initials;
+      document.getElementById('teacherName').textContent = profile.full_name || 'Teacher';
+    } else if (profile.role === 'admin') {
+      document.getElementById('adminDashboard').classList.add('active');
+      document.getElementById('adminAvatar').textContent = initials;
+      document.getElementById('adminName').textContent = profile.full_name || 'Admin';
+    }
   }
 
-  if (profile.role === 'student') {
-    document.getElementById('studentDashboard').classList.add('active');
-    document.getElementById('studentAvatar').textContent = initials;
-    document.getElementById('studentName').textContent = profile.full_name || 'Student';
-  } else if (profile.role === 'teacher') {
-    document.getElementById('teacherDashboard').classList.add('active');
-    document.getElementById('teacherAvatar').textContent = initials;
-    document.getElementById('teacherName').textContent = profile.full_name || 'Teacher';
-  } else if (profile.role === 'admin') {
-    document.getElementById('adminDashboard').classList.add('active');
-    document.getElementById('adminAvatar').textContent = initials;
-    document.getElementById('adminName').textContent = profile.full_name || 'Admin';
-  }
-}
-
-  function goTo(page) {
-    window.location.href = page;
-  }
+  function goTo(page) { window.location.href = page; }
 
   function logout() {
     localStorage.removeItem('ccs_token');
     localStorage.removeItem('ccs_user');
     window.location.reload();
+  }
+
+  function openSidebar(role) {
+    document.getElementById(`${role}Sidebar`).classList.add('open');
+    document.getElementById(`${role}Overlay`).classList.add('open');
+  }
+
+  function closeSidebar(role) {
+    document.getElementById(`${role}Sidebar`).classList.remove('open');
+    document.getElementById(`${role}Overlay`).classList.remove('open');
   }
 
   async function handleForgotPassword() {
@@ -572,9 +1042,7 @@ if (!accessToken) {
     emailjs.init('8cw7ytwOmOiQcy7Te');
     const token = localStorage.getItem('ccs_token');
     const user = localStorage.getItem('ccs_user');
-    if (token && user) {
-      showDashboard(JSON.parse(user));
-    }
+    if (token && user) { showDashboard(JSON.parse(user)); }
   });
 </script>
 </body>
